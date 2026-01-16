@@ -7,9 +7,9 @@
 
 <style>
 :root{
-  --bg1:#0f2027;
-  --bg2:#203a43;
-  --bg3:#2c5364;
+  --bg1:#0b1c22;
+  --bg2:#142e38;
+  --bg3:#1f4554;
   --glass:rgba(255,255,255,.14);
   --blur:blur(22px);
   --text:#ffffff;
@@ -17,17 +17,25 @@
 
 *{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
   background:linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3));
   background-size:400% 400%;
-  animation:bg 20s ease infinite;
+  animation:bg 22s ease infinite;
   color:var(--text);
+  position:relative;
+}
+
+/* subtle noise */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;
 }
 
 @keyframes bg{
@@ -38,27 +46,28 @@ body{
 
 /* SECTION */
 section{
-  padding:90px 22px;
+  padding:100px 22px;
   transition:opacity .4s ease;
 }
 
-section.fade{
-  opacity:0;
-}
+section.fade{opacity:0}
 
 /* CARD */
 .card{
-  max-width:520px;
+  max-width:540px;
   margin:auto;
   background:var(--glass);
   backdrop-filter:var(--blur);
   -webkit-backdrop-filter:var(--blur);
-  border-radius:28px;
-  padding:32px;
-  box-shadow:0 30px 60px rgba(0,0,0,.35);
+  border-radius:30px;
+  padding:34px;
+  box-shadow:0 35px 70px rgba(0,0,0,.4);
   opacity:0;
-  transform:translateY(40px);
-  transition:all .9s cubic-bezier(.2,.8,.2,1);
+  transform:translateY(46px);
+  transition:
+    opacity .9s cubic-bezier(.2,.8,.2,1),
+    transform .9s cubic-bezier(.2,.8,.2,1),
+    box-shadow .4s ease;
 }
 
 .card.show{
@@ -66,42 +75,44 @@ section.fade{
   transform:translateY(0);
 }
 
-/* HERO TEXT */
+.card:hover{
+  box-shadow:0 45px 90px rgba(0,0,0,.5);
+}
+
+/* HERO */
 .hero-title{
-  font-size:34px;
+  font-size:36px;
   font-weight:700;
-  line-height:1.15;
+  line-height:1.12;
 }
 
 .hero-sub{
-  margin-top:16px;
+  margin-top:18px;
+  font-size:16px;
   opacity:.85;
+  max-width:440px;
 }
 
 /* TEXT REVEAL */
 .reveal-text span{
   display:inline-block;
   opacity:0;
-  transform:translateY(16px);
-  animation:revealWord .6s ease forwards;
+  transform:translateY(18px);
+  animation:reveal .6s ease forwards;
 }
 
-@keyframes revealWord{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+@keyframes reveal{
+  to{opacity:1;transform:translateY(0)}
 }
 
 /* EXPERIENCE */
-.item{
-  margin-bottom:22px;
-}
+.item{margin-bottom:22px}
+.item small{opacity:.8}
 
 /* SKILL */
 .badge{
   display:inline-block;
-  padding:10px 18px;
+  padding:11px 18px;
   border-radius:18px;
   background:rgba(255,255,255,.22);
   margin:6px 6px 0 0;
@@ -115,13 +126,13 @@ section.fade{
   left:50%;
   transform:translateX(-50%);
   background:rgba(255,255,255,.18);
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-  border-radius:32px;
-  padding:12px 18px;
+  backdrop-filter:blur(26px);
+  -webkit-backdrop-filter:blur(26px);
+  border-radius:34px;
+  padding:12px 20px;
   display:flex;
   gap:18px;
-  box-shadow:0 25px 50px rgba(0,0,0,.4);
+  box-shadow:0 25px 55px rgba(0,0,0,.45);
   z-index:10;
 }
 
@@ -129,7 +140,8 @@ section.fade{
   text-decoration:none;
   color:#fff;
   font-size:14px;
-  opacity:.75;
+  opacity:.65;
+  transition:opacity .25s ease;
 }
 
 .nav a.active{
@@ -147,7 +159,7 @@ section.fade{
       Hi, I’m Nour Maandhito
     </div>
     <p class="hero-sub reveal-text hero-parallax">
-      I design calm, modern digital and professional experiences that feel intentional and human.
+      I help people and businesses move forward with clarity, structure, and calm digital experiences.
     </p>
   </div>
 </section>
@@ -159,13 +171,13 @@ section.fade{
     <div class="item">
       <strong>2024 — Present</strong><br>
       Legal & Digital Consultant<br>
-      <small>Helping individuals and businesses move with clarity, confidence, and compliance.</small>
+      <small>Advising individuals and businesses with a balance of compliance, clarity, and usability.</small>
     </div>
 
     <div class="item">
       <strong>2022 — 2024</strong><br>
       Independent Professional<br>
-      <small>Legal services, digital presence, and client-focused solutions.</small>
+      <small>Legal services, digital presence, and client-centric problem solving.</small>
     </div>
   </div>
 </section>
@@ -174,8 +186,8 @@ section.fade{
   <div class="card reveal">
     <h2 class="reveal-text">Skills & Focus</h2>
     <span class="badge">Legal Consulting</span>
+    <span class="badge">Digital Strategy</span>
     <span class="badge">Web UI / UX</span>
-    <span class="badge">Strategic Thinking</span>
     <span class="badge">Client Communication</span>
   </div>
 </section>
@@ -184,7 +196,7 @@ section.fade{
   <div class="card reveal">
     <h2 class="reveal-text">Let’s Connect</h2>
     <p>
-      Open for collaboration, consultation, and meaningful long-term projects.
+      Open for meaningful collaboration, long-term consulting, and thoughtful projects.
     </p>
     <p>
       WhatsApp · Email · Social
@@ -202,29 +214,27 @@ section.fade{
 
 <script>
 // SCROLL REVEAL
-const cards = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('show');
-    }
+const cards=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting)e.target.classList.add('show');
   });
 },{threshold:.15});
-cards.forEach(card=>observer.observe(card));
+cards.forEach(c=>observer.observe(c));
 
-// TEXT REVEAL (APPLE STYLE)
+// TEXT REVEAL
 document.querySelectorAll('.reveal-text').forEach(el=>{
-  const words = el.innerText.split(" ");
+  const words=el.innerText.split(" ");
   el.innerHTML="";
-  words.forEach((word,i)=>{
-    const span=document.createElement("span");
-    span.textContent=word+" ";
-    span.style.animationDelay=`${i*0.08}s`;
-    el.appendChild(span);
+  words.forEach((w,i)=>{
+    const s=document.createElement("span");
+    s.textContent=w+" ";
+    s.style.animationDelay=`${i*0.08}s`;
+    el.appendChild(s);
   });
 });
 
-// IOS STYLE NAV TRANSITION
+// NAV TRANSITION + ACTIVE STATE
 const links=document.querySelectorAll('.nav a');
 const sections=document.querySelectorAll('section');
 
@@ -232,24 +242,27 @@ links.forEach(link=>{
   link.addEventListener('click',e=>{
     e.preventDefault();
     const target=document.querySelector(link.getAttribute('href'));
-
-    links.forEach(l=>l.classList.remove('active'));
-    link.classList.add('active');
-
-    sections.forEach(sec=>sec.classList.add('fade'));
-
+    sections.forEach(s=>s.classList.add('fade'));
     setTimeout(()=>{
       target.scrollIntoView({behavior:'smooth'});
-      sections.forEach(sec=>sec.classList.remove('fade'));
-    },200);
+      sections.forEach(s=>s.classList.remove('fade'));
+    },180);
   });
 });
 
-// PARALLAX TEXT
 window.addEventListener('scroll',()=>{
   const sc=window.scrollY;
   document.querySelectorAll('.hero-parallax').forEach(el=>{
-    el.style.transform=`translateY(${sc*0.15}px)`;
+    el.style.transform=`translateY(${sc*0.12}px)`;
+  });
+
+  sections.forEach(sec=>{
+    const top=sec.offsetTop-120;
+    const id=sec.getAttribute('id');
+    if(sc>=top){
+      links.forEach(l=>l.classList.remove('active'));
+      document.querySelector(`.nav a[href="#${id}"]`).classList.add('active');
+    }
   });
 });
 </script>
