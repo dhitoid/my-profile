@@ -1,1 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile</title>
+
+<style>
+:root{
+  --bg1:#0f2027;
+  --bg2:#203a43;
+  --bg3:#2c5364;
+  --glass:rgba(255,255,255,.15);
+  --blur:blur(20px);
+  --text:#fff;
+}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+  background:linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3));
+  background-size:400% 400%;
+  animation:bg 15s ease infinite;
+  color:var(--text);
+}
+
+@keyframes bg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+section{
+  padding:32px 20px;
+}
+
+.card{
+  background:var(--glass);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  border-radius:24px;
+  padding:24px;
+  margin-bottom:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+h1,h2{
+  margin-top:0;
+}
+
+.timeline .item{
+  margin-bottom:16px;
+}
+
+.badge{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:14px;
+  background:rgba(255,255,255,.25);
+  margin:6px 6px 0 0;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<section>
+  <div class="card">
+    <h1>Nama Kamu</h1>
+    <p>Professional Title / Role</p>
+    <p>Brief description about yourself.</p>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <h2>Experience</h2>
+    <div class="timeline">
+      <div class="item">
+        <strong>2024 – Sekarang</strong><br>
+        Posisi / Role<br>
+        <small>Deskripsi singkat pengalaman</small>
+      </div>
+      <div class="item">
+        <strong>2022 – 2024</strong><br>
+        Posisi / Role<br>
+        <small>Deskripsi singkat pengalaman</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <h2>Skills</h2>
+    <span class="badge">Legal Consulting</span>
+    <span class="badge">Web UI</span>
+    <span class="badge">Communication</span>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <h2>Contact</h2>
+    <p>WhatsApp: 081802168184</p>
+    <p>Email: nourmaand@email.com</p>
+  </div>
+</section>
+
+</body>
+</html>
 
