@@ -11,7 +11,7 @@
   --bg2:#203a43;
   --bg3:#2c5364;
   --glass:rgba(255,255,255,.14);
-  --blur:blur(20px);
+  --blur:blur(22px);
   --text:#fff;
 }
 
@@ -22,8 +22,14 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
   background:linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3));
   background-size:400% 400%;
-  animation:bg 18s ease infinite;
+  animation:bg 20s ease infinite;
   color:var(--text);
+  transition:opacity .6s ease, transform .6s ease;
+}
+
+body.fade-out{
+  opacity:0;
+  transform:translateY(20px);
 }
 
 @keyframes bg{
@@ -32,9 +38,8 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* SECTION */
 section{
-  padding:60px 22px;
+  padding:80px 22px;
 }
 
 /* CARD */
@@ -42,13 +47,13 @@ section{
   background:var(--glass);
   backdrop-filter:var(--blur);
   -webkit-backdrop-filter:var(--blur);
-  border-radius:26px;
-  padding:28px;
-  margin-bottom:28px;
-  box-shadow:0 25px 50px rgba(0,0,0,.3);
+  border-radius:28px;
+  padding:30px;
+  margin-bottom:32px;
+  box-shadow:0 30px 60px rgba(0,0,0,.35);
   opacity:0;
   transform:translateY(40px);
-  transition:all .8s ease;
+  transition:all .9s cubic-bezier(.2,.8,.2,1);
 }
 
 .card.show{
@@ -56,36 +61,32 @@ section{
   transform:translateY(0);
 }
 
-/* TEXT STYLE */
+/* HERO TEXT */
 .hero-title{
-  font-size:30px;
+  font-size:32px;
   font-weight:700;
   line-height:1.2;
 }
 
 .hero-sub{
   opacity:.85;
-  margin-top:12px;
+  margin-top:14px;
+  max-width:420px;
 }
 
-.highlight{
-  opacity:.9;
-  font-weight:500;
+.hero-parallax{
+  will-change:transform;
 }
 
 /* EXPERIENCE */
 .timeline-item{
-  margin-bottom:18px;
-}
-
-.timeline-item strong{
-  font-size:16px;
+  margin-bottom:20px;
 }
 
 /* SKILL */
 .badge{
   display:inline-block;
-  padding:10px 16px;
+  padding:10px 18px;
   border-radius:18px;
   background:rgba(255,255,255,.22);
   margin:6px 6px 0 0;
@@ -99,13 +100,14 @@ section{
   left:50%;
   transform:translateX(-50%);
   background:rgba(255,255,255,.18);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border-radius:28px;
-  padding:10px 14px;
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+  border-radius:30px;
+  padding:12px 16px;
   display:flex;
-  gap:16px;
-  box-shadow:0 20px 40px rgba(0,0,0,.35);
+  gap:18px;
+  box-shadow:0 25px 50px rgba(0,0,0,.4);
+  z-index:10;
 }
 
 .nav a{
@@ -125,14 +127,11 @@ section{
 
 <section id="home">
   <div class="card reveal">
-    <div class="hero-title">
+    <div class="hero-title hero-parallax">
       Hi, I’m <br> Nour Maandhito
     </div>
-    <p class="hero-sub">
-      I build digital experiences that feel simple, modern, and intentional.
-    </p>
-    <p class="highlight">
-      Focused on clarity, usability, and long-term value.
+    <p class="hero-sub hero-parallax">
+      Designing thoughtful digital and professional experiences that feel effortless and human.
     </p>
   </div>
 </section>
@@ -144,13 +143,13 @@ section{
     <div class="timeline-item">
       <strong>2024 — Present</strong><br>
       Legal & Digital Consultant<br>
-      <small>Helping individuals and businesses navigate legality and digital presence.</small>
+      <small>Helping individuals and businesses move with clarity, confidence, and compliance.</small>
     </div>
 
     <div class="timeline-item">
       <strong>2022 — 2024</strong><br>
       Independent Professional<br>
-      <small>Worked with multiple clients across legal services and web-based solutions.</small>
+      <small>Worked across legal services, digital presence, and client-focused solutions.</small>
     </div>
   </div>
 </section>
@@ -160,16 +159,16 @@ section{
     <h2>Skills & Focus</h2>
     <span class="badge">Legal Consulting</span>
     <span class="badge">Web UI / UX</span>
+    <span class="badge">Strategic Thinking</span>
     <span class="badge">Client Communication</span>
-    <span class="badge">Problem Solving</span>
   </div>
 </section>
 
 <section id="contact">
   <div class="card reveal">
-    <h2>Let’s Connect</h2>
+    <h2>Let’s Work Together</h2>
     <p>
-      Available for collaboration, consultation, and meaningful projects.
+      Open for collaboration, consulting, and long-term partnerships.
     </p>
     <p>
       WhatsApp · Email · Social
@@ -186,8 +185,8 @@ section{
 </div>
 
 <script>
+// SCROLL REVEAL
 const cards = document.querySelectorAll('.reveal');
-
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
@@ -195,8 +194,28 @@ const observer = new IntersectionObserver(entries=>{
     }
   });
 },{threshold:.15});
-
 cards.forEach(card=>observer.observe(card));
+
+// IOS PAGE TRANSITION
+document.querySelectorAll('.nav a').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    const target = link.getAttribute('href');
+    document.body.classList.add('fade-out');
+    setTimeout(()=>{
+      location.hash = target;
+      document.body.classList.remove('fade-out');
+    },350);
+  });
+});
+
+// PARALLAX TEXT
+window.addEventListener('scroll',()=>{
+  const sc = window.scrollY;
+  document.querySelectorAll('.hero-parallax').forEach(el=>{
+    el.style.transform = `translateY(${sc * 0.15}px)`;
+  });
+});
 </script>
 
 </body>
