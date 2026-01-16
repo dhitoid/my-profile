@@ -3,24 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Profile</title>
+<title>Personal Profile</title>
 
 <style>
 :root{
   --bg1:#0f2027;
   --bg2:#203a43;
   --bg3:#2c5364;
-  --glass:rgba(255,255,255,.15);
+  --glass:rgba(255,255,255,.14);
   --blur:blur(20px);
   --text:#fff;
 }
+
+*{box-sizing:border-box}
 
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
   background:linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3));
   background-size:400% 400%;
-  animation:bg 15s ease infinite;
+  animation:bg 18s ease infinite;
   color:var(--text);
 }
 
@@ -30,84 +32,172 @@ body{
   100%{background-position:0% 50%}
 }
 
+/* SECTION */
 section{
-  padding:32px 20px;
+  padding:60px 22px;
 }
 
+/* CARD */
 .card{
   background:var(--glass);
   backdrop-filter:var(--blur);
   -webkit-backdrop-filter:var(--blur);
-  border-radius:24px;
-  padding:24px;
-  margin-bottom:20px;
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  border-radius:26px;
+  padding:28px;
+  margin-bottom:28px;
+  box-shadow:0 25px 50px rgba(0,0,0,.3);
+  opacity:0;
+  transform:translateY(40px);
+  transition:all .8s ease;
 }
 
-h1,h2{
-  margin-top:0;
+.card.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
-.timeline .item{
-  margin-bottom:16px;
+/* TEXT STYLE */
+.hero-title{
+  font-size:30px;
+  font-weight:700;
+  line-height:1.2;
 }
 
+.hero-sub{
+  opacity:.85;
+  margin-top:12px;
+}
+
+.highlight{
+  opacity:.9;
+  font-weight:500;
+}
+
+/* EXPERIENCE */
+.timeline-item{
+  margin-bottom:18px;
+}
+
+.timeline-item strong{
+  font-size:16px;
+}
+
+/* SKILL */
 .badge{
   display:inline-block;
-  padding:8px 14px;
-  border-radius:14px;
-  background:rgba(255,255,255,.25);
+  padding:10px 16px;
+  border-radius:18px;
+  background:rgba(255,255,255,.22);
   margin:6px 6px 0 0;
   font-size:14px;
+}
+
+/* IOS NAV */
+.nav{
+  position:fixed;
+  bottom:16px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-radius:28px;
+  padding:10px 14px;
+  display:flex;
+  gap:16px;
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+.nav a{
+  text-decoration:none;
+  color:#fff;
+  font-size:14px;
+  opacity:.8;
+}
+
+.nav a:hover{
+  opacity:1;
 }
 </style>
 </head>
 
 <body>
 
-<section>
-  <div class="card">
-    <h1>Nama Kamu</h1>
-    <p>Professional Title / Role</p>
-    <p>Brief description about yourself.</p>
+<section id="home">
+  <div class="card reveal">
+    <div class="hero-title">
+      Hi, I’m <br> Nour Maandhito
+    </div>
+    <p class="hero-sub">
+      I build digital experiences that feel simple, modern, and intentional.
+    </p>
+    <p class="highlight">
+      Focused on clarity, usability, and long-term value.
+    </p>
   </div>
 </section>
 
-<section>
-  <div class="card">
+<section id="experience">
+  <div class="card reveal">
     <h2>Experience</h2>
-    <div class="timeline">
-      <div class="item">
-        <strong>2024 – Sekarang</strong><br>
-        Posisi / Role<br>
-        <small>Deskripsi singkat pengalaman</small>
-      </div>
-      <div class="item">
-        <strong>2022 – 2024</strong><br>
-        Posisi / Role<br>
-        <small>Deskripsi singkat pengalaman</small>
-      </div>
+
+    <div class="timeline-item">
+      <strong>2024 — Present</strong><br>
+      Legal & Digital Consultant<br>
+      <small>Helping individuals and businesses navigate legality and digital presence.</small>
+    </div>
+
+    <div class="timeline-item">
+      <strong>2022 — 2024</strong><br>
+      Independent Professional<br>
+      <small>Worked with multiple clients across legal services and web-based solutions.</small>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="card">
-    <h2>Skills</h2>
+<section id="skills">
+  <div class="card reveal">
+    <h2>Skills & Focus</h2>
     <span class="badge">Legal Consulting</span>
-    <span class="badge">Web UI</span>
-    <span class="badge">Communication</span>
+    <span class="badge">Web UI / UX</span>
+    <span class="badge">Client Communication</span>
+    <span class="badge">Problem Solving</span>
   </div>
 </section>
 
-<section>
-  <div class="card">
-    <h2>Contact</h2>
-    <p>WhatsApp: 081802168184</p>
-    <p>Email: nourmaand@email.com</p>
+<section id="contact">
+  <div class="card reveal">
+    <h2>Let’s Connect</h2>
+    <p>
+      Available for collaboration, consultation, and meaningful projects.
+    </p>
+    <p>
+      WhatsApp · Email · Social
+    </p>
   </div>
 </section>
+
+<!-- IOS NAV -->
+<div class="nav">
+  <a href="#home">Home</a>
+  <a href="#experience">Experience</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<script>
+const cards = document.querySelectorAll('.reveal');
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+},{threshold:.15});
+
+cards.forEach(card=>observer.observe(card));
+</script>
 
 </body>
 </html>
-
