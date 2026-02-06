@@ -1,0 +1,1595 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kalkulator KPR Pintar</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f7f8fc;
+  --card:#ffffffcc;
+  --text:#0f172a;
+  --muted:#64748b;
+  --primary:#6366f1;
+  --accent:#22d3ee;
+  --border:#e5e7eb;
+  --danger:#ef4444;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0b1020;
+    --card:#0f172acc;
+    --text:#e5e7eb;
+    --muted:#94a3b8;
+    --border:#1f2937;
+  }
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Plus Jakarta Sans",sans-serif;
+  background:
+    radial-gradient(80% 40% at 50% -10%, rgba(99,102,241,.25), transparent),
+    radial-gradient(60% 30% at 100% 0%, rgba(34,211,238,.25), transparent),
+    var(--bg);
+  color:var(--text);
+}
+
+.container{
+  max-width:520px;
+  margin:auto;
+  padding:32px 20px 140px;
+}
+
+.hero-badge{
+  display:inline-block;
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+  margin-bottom:12px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:white;
+}
+
+.hero h1{
+  font-size:34px;
+  line-height:1.2;
+  margin-bottom:12px;
+}
+.hero p{color:var(--muted);margin-bottom:28px}
+
+.card{
+  background:var(--card);
+  backdrop-filter: blur(16px);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:22px;
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+}
+
+.field{margin-bottom:16px}
+label{font-size:13px;color:var(--muted)}
+input{
+  width:100%;
+  margin-top:6px;
+  padding:14px 16px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--text);
+  font-size:16px;
+  transition:.25s;
+}
+input:focus{
+  outline:none;
+  border-color:var(--primary);
+  box-shadow:0 0 0 4px rgba(99,102,241,.15);
+}
+input.error{
+  border-color:var(--danger);
+  animation:shake .3s;
+}
+
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-4px)}
+  75%{transform:translateX(4px)}
+}
+
+/* ===== PROGRESS BAR (TAMBAHAN) ===== */
+.progress-wrap{
+  margin:-6px 0 18px;
+}
+.progress-label{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+.progress-bar{
+  height:10px;
+  background:rgba(0,0,0,.08);
+  border-radius:999px;
+  overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  transition:width .35s ease;
+}
+/* ================================= */
+
+.result{
+  margin-top:20px;
+  padding:18px;
+  border-radius:18px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:white;
+}
+.result h2{font-size:32px;margin:6px 0 0}
+
+.cta{
+  position:fixed;
+  left:0;right:0;bottom:0;
+  padding:14px;
+  backdrop-filter: blur(10px);
+}
+.cta button{
+  width:100%;
+  padding:16px;
+  border-radius:18px;
+  border:none;
+  font-size:16px;
+  font-weight:600;
+  color:white;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  transition:.2s;
+}
+.cta button:active{transform:scale(.97)}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.modal.active{display:flex}
+
+.modal-card{
+  width:90%;
+  max-width:420px;
+  background:var(--card);
+  border-radius:24px;
+  padding:22px;
+  border:1px solid var(--border);
+  animation:pop .3s ease;
+}
+
+@keyframes pop{
+  from{opacity:0;transform:scale(.92)}
+  to{opacity:1;transform:scale(1)}
+}
+
+.modal-card button{
+  margin-top:12px;
+  width:100%;
+  padding:14px;
+  border-radius:16px;
+  border:none;
+  font-weight:600;
+  color:white;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  text-align:center;
+  padding:18px 16px 90px;
+  font-size:12px;
+  color:var(--muted);
+}
+.footer strong{
+  color:var(--text);
+}
+.footer a{
+  color:inherit;
+  text-decoration:none;
+}
+/* ================== */
+
+/* ===== RANGE SLIDER • MODERN 2026 ===== */
+.range{
+  -webkit-appearance:none;
+  appearance:none;
+  width:100%;
+  height:10px;
+  border-radius:999px;
+  background:linear-gradient(
+    to right,
+    var(--primary) 0%,
+    var(--accent) 50%,
+    rgba(0,0,0,.12) 50%
+  );
+  outline:none;
+  margin-top:10px;
+  transition:background .25s ease;
+}
+
+/* TRACK (iOS / Chrome / Android) */
+.range::-webkit-slider-runnable-track{
+  height:10px;
+  border-radius:999px;
+}
+
+/* THUMB */
+.range::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.25),
+    inset 0 0 0 3px rgba(255,255,255,.7);
+  cursor:pointer;
+  margin-top:-6px;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+
+/* THUMB ACTIVE */
+.range::-webkit-slider-thumb:active{
+  transform:scale(1.15);
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.35),
+    inset 0 0 0 3px rgba(255,255,255,.9);
+}
+
+/* FIREFOX */
+.range::-moz-range-track{
+  height:10px;
+  border-radius:999px;
+  background:rgba(0,0,0,.12);
+}
+.range::-moz-range-thumb{
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  border:none;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 6px 14px rgba(0,0,0,.25);
+}
+
+/* FOCUS GLOW */
+.range:focus-visible::-webkit-slider-thumb{
+  box-shadow:
+    0 0 0 6px rgba(99,102,241,.25),
+    0 8px 20px rgba(0,0,0,.3);
+}
+
+.info-box{
+  margin-top:16px;
+  padding:14px;
+  border-radius:16px;
+  background:rgba(99,102,241,.08);
+  font-size:13px;
+}
+
+/* ===============================
+   TESTIMONI PRO 2026
+================================ */
+.testi-card{
+  margin-top:22px;
+  padding:18px 14px 20px;
+  border-radius:24px;
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.12),
+    rgba(255,255,255,.04)
+  );
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 24px 48px rgba(0,0,0,.18);
+  position:relative;
+  overflow:hidden;
+}
+
+/* SLIDER */
+.testi-slider{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:4px;
+}
+
+.testi-slider::-webkit-scrollbar{
+  display:none;
+}
+
+/* ITEM */
+.testi-item{
+  flex:0 0 78%;
+  scroll-snap-align:center;
+  padding:18px;
+  border-radius:20px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(14px);
+  transition:
+    transform .45s cubic-bezier(.4,0,.2,1),
+    opacity .45s ease,
+    box-shadow .45s ease;
+  opacity:.45;
+  transform:scale(.94);
+}
+
+/* AKTIF */
+.testi-item.active{
+  opacity:1;
+  transform:scale(1);
+  box-shadow:0 16px 38px rgba(0,0,0,.32);
+}
+
+/* STATUS GLOW */
+.testi-item.active[data-status="ok"]{
+  box-shadow:
+    0 0 0 1px rgba(46,204,113,.45),
+    0 18px 40px rgba(46,204,113,.35);
+}
+
+.testi-item.active[data-status="warn"]{
+  box-shadow:
+    0 0 0 1px rgba(241,196,15,.45),
+    0 18px 40px rgba(241,196,15,.35);
+}
+
+.testi-item.active[data-status="bad"]{
+  box-shadow:
+    0 0 0 1px rgba(231,76,60,.45),
+    0 18px 40px rgba(231,76,60,.35);
+}
+
+.testi-item:not(.active){
+  filter:saturate(.85);
+}
+
+/* STAR */
+.testi-item .stars{
+  font-size:14px;
+  letter-spacing:1px;
+  margin-bottom:8px;
+}
+
+/* TEXT */
+.testi-item p{
+  font-size:14px;
+  line-height:1.5;
+  margin:0;
+}
+
+/* NAME */
+.testi-item strong{
+  display:block;
+  margin-top:10px;
+  font-weight:600;
+  opacity:.85;
+}
+
+/* DOTS */
+.testi-dots{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:14px;
+}
+
+.testi-dots span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(255,255,255,.35);
+  transition:.35s cubic-bezier(.4,0,.2,1);
+}
+
+.testi-dots span.active{
+  width:20px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#2ecc71,#6ee7b7);
+}
+
+.disclaimer{
+  margin-top:14px;
+  font-size:11px;
+  color:var(--muted);
+  text-align:center;
+}
+
+.couple-box{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:20px 0 12px;
+}
+
+.couple-input{
+  display:none;
+  gap:12px;
+}
+
+.couple-input.show{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+
+/* switch modern */
+.switch{
+  position:relative;
+  width:46px;
+  height:26px;
+}
+
+.switch input{display:none}
+
+.switch .slider{
+  position:absolute;
+  inset:0;
+  background:#ccc;
+  border-radius:20px;
+  transition:.3s;
+}
+
+.switch .slider:before{
+  content:"";
+  position:absolute;
+  width:20px;
+  height:20px;
+  left:3px;
+  top:3px;
+  background:white;
+  border-radius:50%;
+  transition:.3s;
+}
+
+.switch input:checked + .slider{
+  background:var(--primary);
+}
+
+.switch input:checked + .slider:before{
+  transform:translateX(20px);
+}
+
+/* ===== STATUS ANIMASI 2026 ===== */
+.status{
+  margin-top:14px;
+  padding:14px 16px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:600;
+  font-size:15px;
+  backdrop-filter: blur(14px);
+  transition:.35s cubic-bezier(.4,0,.2,1);
+  transform:scale(.96);
+  opacity:0;
+}
+
+.status.show{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* ICON */
+.status .icon{
+  width:22px;
+  height:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+}
+
+/* ===== STATE ===== */
+.status.idle{
+  background:rgba(255,255,255,.08);
+  color:#aaa;
+}
+
+.status.ok{
+  background:rgba(46,204,113,.18);
+  color:#2ecc71;
+  box-shadow:0 0 22px rgba(46,204,113,.25);
+}
+
+.status.warn{
+  background:rgba(241,196,15,.18);
+  color:#f1c40f;
+  box-shadow:0 0 20px rgba(241,196,15,.25);
+  animation:pulse 1.8s infinite;
+}
+
+.status.bad{
+  background:rgba(231,76,60,.18);
+  color:#e74c3c;
+  box-shadow:0 0 20px rgba(231,76,60,.25);
+  animation:shake .35s;
+}
+
+/* ===== FINANCE CARD PRO ===== */
+.finance-card.pro{
+  margin-top:20px;
+  padding:18px;
+  border-radius:22px;
+  background:
+    linear-gradient(135deg,
+      rgba(99,102,241,.18),
+      rgba(34,211,238,.08)
+    );
+  border:1px solid rgba(99,102,241,.35);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.12),
+    inset 0 0 0 1px rgba(255,255,255,.06);
+  backdrop-filter: blur(20px);
+}
+
+.finance-head{
+  font-size:13px;
+  font-weight:700;
+  color:var(--muted);
+  margin-bottom:12px;
+}
+
+.finance-main{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.finance-amount strong{
+  font-size:26px;
+}
+
+.finance-amount small{
+  font-size:11px;
+  color:var(--muted);
+}
+
+/* ===== PROGRESS ===== */
+.finance-progress .progress-label{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+
+.progress-bar.soft{
+  height:10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.18);
+  overflow:hidden;
+}
+
+.progress-bar.soft .progress-fill{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  transition:width .6s cubic-bezier(.4,0,.2,1),
+             background .4s ease;
+}
+
+.progress-fill.safe{
+  background:linear-gradient(90deg,#22c55e,#4ade80);
+}
+.progress-fill.warn{
+  background:linear-gradient(90deg,#facc15,#fde047);
+}
+.progress-fill.danger{
+  background:linear-gradient(90deg,#ef4444,#fb7185);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.03)}
+}
+
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-3px)}
+  50%{transform:translateX(3px)}
+  75%{transform:translateX(-2px)}
+  100%{transform:translateX(0)}
+}
+
+.save-actions{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+}
+
+.save-actions button{
+  flex:1;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  backdrop-filter:blur(12px);
+  transition:.3s;
+}
+
+.save-actions button:hover{
+  background:rgba(255,255,255,.16);
+}
+
+.saved-list{
+  margin-top:14px;
+  display:none;
+}
+
+.saved-list.show{
+  display:block;
+}
+
+.saved-item{
+  padding:14px;
+  border-radius:14px;
+  background:rgba(255,255,255,.06);
+  margin-bottom:10px;
+}
+
+.saved-item strong{
+  font-size:15px;
+}
+
+.saved-actions{
+  margin-top:8px;
+  display:flex;
+  gap:8px;
+}
+
+.saved-actions button{
+  flex:1;
+  padding:8px;
+  border-radius:10px;
+  border:none;
+  font-size:13px;
+  cursor:pointer;
+  background:rgba(255,255,255,.1);
+  color:#fff;
+}
+
+.smart-advice{
+  margin-top:14px;
+  padding:16px;
+  border-radius:16px;
+  background:linear-gradient(
+    135deg,
+    rgba(0,200,255,.12),
+    rgba(255,255,255,.05)
+  );
+  backdrop-filter:blur(16px);
+  font-size:14px;
+  line-height:1.5;
+  display:none;
+  animation:fadeUp .4s ease;
+}
+
+.smart-advice.show{
+  display:block;
+}
+
+.smart-advice strong{
+  color:#6ee7ff;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.unit-match{
+  margin-top:14px;
+  padding:16px;
+  border-radius:18px;
+  display:none;
+  animation:fadeUp .4s ease;
+}
+
+.unit-match.good{
+  background:linear-gradient(
+    135deg,
+    rgba(34,197,94,.18),
+    rgba(255,255,255,.05)
+  );
+  border:1px solid rgba(34,197,94,.35);
+}
+
+.unit-match.mid{
+  background:linear-gradient(
+    135deg,
+    rgba(250,204,21,.18),
+    rgba(255,255,255,.05)
+  );
+  border:1px solid rgba(250,204,21,.35);
+}
+
+.unit-match.bad{
+  background:linear-gradient(
+    135deg,
+    rgba(239,68,68,.18),
+    rgba(255,255,255,.05)
+  );
+  border:1px solid rgba(239,68,68,.35);
+}
+
+.unit-match h4{
+  margin:0 0 6px;
+  font-size:15px;
+}
+
+.unit-match p{
+  margin:0;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.badge{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:600;
+  margin-bottom:8px;
+}
+
+.badge.good{background:#22c55e;color:white}
+.badge.mid{background:#facc15;color:#111}
+.badge.bad{background:#ef4444;color:white}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+  <section class="hero">
+    <div class="hero-badge">Kalkulator KPR • Profesional</div>
+    <h1>Hitung Cicilan Properti<br>Secara Realistis</h1>
+    <p>Simulasi cicilan yang rapi, cepat, dan siap dikonsultasikan.</p>
+  </section>
+
+  <section class="card">
+    <div class="field">
+      <label>Harga Properti</label>
+      <input id="harga" value="500.000.000">
+    </div>
+
+    <div class="field">
+      <label>DP (%)</label>
+      <input id="dp" type="number" value="10">
+    </div>
+
+    <!-- PROGRESS DP -->
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>DP</span>
+        <strong><span id="dpVal">5</span>%</strong>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="dpBar"></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Tenor (Tahun)</label>
+      <input id="tenor" type="number" value="20">
+    </div>
+
+    <!-- PROGRESS TENOR -->
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>Tenor</span>
+        <strong><span id="tenorVal">20</span> tahun</strong>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="tenorBar"></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Bunga (% / tahun)</label>
+      <input id="bunga" type="number" value="8">
+    </div>
+
+    <div class="result">
+      <small>Perkiraan Cicilan / bulan</small>
+      <h2 id="hasil">Rp 0</h2>
+    </div>
+    
+    <div class="save-actions">
+      <button onclick="saveSimulation()">💾 Simpan Hasil</button>
+      <button onclick="toggleSaved()">📂 Lihat Simpanan</button>
+    </div>
+
+    <div id="savedList" class="saved-list"></div>
+
+    
+    <div class="info-box">
+  🏦 Simulasi Bank:
+  <br><br>
+
+  <strong>FIX (3 Tahun)</strong><br>
+  Cicilan: <strong id="fixCicilan">Rp 0</strong>
+  <br><br>
+
+  <strong>Floating</strong><br>
+  Cicilan: <strong id="floatCicilan">Rp 0</strong>
+</div>
+    
+<!-- FINANCE CARD PRO -->
+<div class="finance-card pro">
+
+  <div class="finance-head">
+    💼 Analisa Keuangan Anda
+  </div>
+
+  <div class="finance-main">
+    <div class="finance-amount">
+      <strong id="gajiMin">Rp 0</strong>
+      <small>Gaji minimal agar cicilan aman (≤30%)</small>
+    </div>
+
+    <div class="finance-progress">
+      <div class="progress-label">
+        <span>Keamanan Finansial</span>
+        <span id="ratioText">0%</span>
+      </div>
+      <div class="progress-bar soft">
+        <div class="progress-fill" id="financeBar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="statusBox" class="status idle show">
+    <span class="icon">💼</span>
+    <span class="text">Masukkan data cicilan</span>
+  </div>
+
+</div>
+  
+  <div id="smartAdvice" class="smart-advice"></div>
+  <div id="unitMatch" class="unit-match"></div>
+  
+  <div class="couple-box">
+  <label class="switch">
+    <input type="checkbox" id="coupleToggle">
+    <span class="slider"></span>
+  </label>
+  <span class="label">Simulasi pasangan (gabung gaji)</span>
+</div>
+
+<div class="couple-input" id="coupleInput">
+  <div class="field">
+    <label>Gaji Suami</label>
+    <input type="text" id="gajiSuami" placeholder="Rp 0">
+  </div>
+  <div class="field">
+    <label>Gaji Istri</label>
+    <input type="text" id="gajiIstri" placeholder="Rp 0">
+  </div>
+</div>
+
+<!-- TESTIMONI -->
+<div class="testi-card">
+  <div class="testi-slider" id="testiSlider">
+    
+<div class="testi-item active">
+  <div class="stars">⭐⭐⭐⭐⭐</div>
+  <p>Simulasinya jelas dan gampang dipahami. Jadi yakin ambil rumah.</p>
+  <strong>— Andi, Tangerang</strong>
+</div>
+
+<div class="testi-item">
+  <div class="stars">⭐⭐⭐⭐⭐</div>
+  <p>Kalkulator ini beda, real time dan keliatan aman atau nggaknya.</p>
+  <strong>— Yulia & Suami, Depok</strong>
+</div>
+
+<div class="testi-item">
+  <div class="stars">⭐⭐⭐⭐⭐</div>
+  <p>Baru kali ini simulasi KPR yang jujur soal risiko cicilan.</p>
+  <strong>— Fajar, Bekasi</strong>
+</div>
+
+<div class="testi-item">
+  <div class="stars">⭐⭐⭐⭐⭐</div>
+  <p>Cicilannya ringan dan sesuai kemampuan kami.</p>
+  <strong>— Dewi & Suami, BSD</strong>
+</div>
+
+<div class="testi-item">
+  <div class="stars">⭐⭐⭐⭐⭐</div>
+  <p>Simulasi ini bikin kami yakin ambil unit.</p>
+  <strong>— Hendra, Tangerang</strong>
+</div>
+
+<div class="testi-item">
+  <div class="stars">⭐⭐⭐⭐⭐</div>
+  <p>Cicilan agak mepet tapi masih bisa diatur.</p>
+  <strong>— Riko, Depok</strong>
+</div>
+
+<div class="testi-item">
+  <div class="stars">⭐⭐⭐⭐⭐</div>
+  <p>Simulasi ini jujur dan bikin saya nggak maksa.</p>
+  <strong>— Aldi, Bekasi</strong>
+</div>
+
+  </div>
+
+  <div class="testi-dots" id="testiDots"></div>
+</div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    *Hasil simulasi bersifat estimasi. Persetujuan KPR mengikuti kebijakan masing-masing bank.*
+  </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  © <span id="year"></span> <strong>dhitoproperty.id</strong><br>
+  Kalkulator KPR Profesional
+</footer>
+
+<div class="cta">
+  <button onclick="openLead()">💬 Konsultasi & Hasil Lengkap</button>
+</div>
+
+<div class="modal" id="leadModal" onclick="closeLead(event)">
+  <div class="modal-card">
+    <h3>Dapatkan Hasil Lengkap</h3>
+    <div class="field">
+      <label>Nama</label>
+      <input id="namaLead">
+    </div>
+    <div class="field">
+      <label>WhatsApp</label>
+      <input id="waLead">
+    </div>
+    <button id="submitBtn" onclick="submitLead()">Kirim ke WhatsApp</button>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   UTIL ANGKA
+========================================================= */
+function formatRupiah(n){
+  return n.toLocaleString("id-ID");
+}
+function cleanNumber(v){
+  return parseInt(String(v).replace(/\./g,"")) || 0;
+}
+
+/* =========================================================
+   DOM ELEMENT
+========================================================= */
+const hargaEl = document.getElementById("harga");
+const dpEl = document.getElementById("dp");
+const tenorEl = document.getElementById("tenor");
+const bungaEl = document.getElementById("bunga");
+const hasil = document.getElementById("hasil");
+
+const dpBar = document.getElementById("dpBar");
+const tenorBar = document.getElementById("tenorBar");
+const dpVal = document.getElementById("dpVal");
+const tenorVal = document.getElementById("tenorVal");
+
+const fixCicilanEl = document.getElementById("fixCicilan");
+const floatCicilanEl = document.getElementById("floatCicilan");
+
+const gajiMinEl = document.getElementById("gajiMin");
+const gajiEl = document.getElementById("gaji");
+const gajiSuamiEl = document.getElementById("gajiSuami");
+const gajiIstriEl = document.getElementById("gajiIstri");
+const financeBar = document.getElementById("financeBar");
+const ratioText = document.getElementById("ratioText");
+const coupleToggle = document.getElementById("coupleToggle");
+const coupleInput = document.getElementById("coupleInput");
+
+const statusEl = document.getElementById("status");
+
+const leadModal = document.getElementById("leadModal");
+const namaLead = document.getElementById("namaLead");
+const waLead = document.getElementById("waLead");
+const submitBtn = document.getElementById("submitBtn");
+const statusBox = document.getElementById("statusBox");
+const savedListEl = document.getElementById("savedList");
+const smartAdviceEl = document.getElementById("smartAdvice");
+const unitMatchEl = document.getElementById("unitMatch");
+const testiItems = document.querySelectorAll(".testi-item");
+const testiDots = document.getElementById("testiDots");
+const slider = document.getElementById("testiSlider");
+
+const testiData = {
+  ok: [
+    {
+      text:"Cicilannya ringan dan sesuai kemampuan kami.",
+      name:"Dewi & Suami, BSD"
+    },
+    {
+      text:"Simulasi ini bikin kami yakin ambil unit.",
+      name:"Hendra, Tangerang"
+    }
+  ],
+  warn: [
+    {
+      text:"Cicilan agak mepet tapi masih bisa diatur.",
+      name:"Riko, Depok"
+    }
+  ],
+  bad: [
+    {
+      text:"Simulasi ini jujur dan bikin saya nggak maksa.",
+      name:"Aldi, Bekasi"
+    }
+  ]
+};
+
+/* =========================================================
+   INIT DEFAULT VALUE (WAJIB)
+========================================================= */
+function initDefault(){
+  if(!dpEl.value) dpEl.value = 10;
+  if(!tenorEl.value) tenorEl.value = 20;
+  if(!bungaEl.value) bungaEl.value = 5;
+}
+
+/* =========================================================
+   AMBIL CICILAN BERSIH
+========================================================= */
+function getCicilan(){
+  return cleanNumber(
+    hasil.textContent.replace(/[^\d]/g,"")
+  );
+}
+
+/* =========================================================
+   HITUNG CICILAN UTAMA
+========================================================= */
+function hitung(){
+  const harga = cleanNumber(hargaEl.value);
+  if(!harga) return;
+
+  const dp = harga * (dpEl.value/100);
+  const pokok = harga - dp;
+  const bulan = tenorEl.value * 12;
+  const bunga = (bungaEl.value/100)/12;
+
+  if(!bulan || !bunga) return;
+
+  const cicilan =
+    pokok * bunga / (1 - Math.pow(1+bunga, -bulan));
+
+  hasil.textContent =
+    "Rp " + formatRupiah(Math.round(cicilan));
+}
+
+/* =========================================================
+   HITUNG SIMULASI BANK
+========================================================= */
+function hitungBank(){
+  const harga = cleanNumber(hargaEl.value);
+  if(!harga) return;
+
+  const dp = harga * (dpEl.value/100);
+  const pokok = harga - dp;
+  const bulan = tenorEl.value * 12;
+
+  const bungaFix = 0.07 / 12;
+  const bungaFloat = 0.11 / 12;
+
+  const cicilanFix =
+    pokok * bungaFix / (1 - Math.pow(1+bungaFix, -bulan));
+  const cicilanFloat =
+    pokok * bungaFloat / (1 - Math.pow(1+bungaFloat, -bulan));
+
+  fixCicilanEl.textContent =
+    "Rp " + formatRupiah(Math.round(cicilanFix));
+  floatCicilanEl.textContent =
+    "Rp " + formatRupiah(Math.round(cicilanFloat));
+}
+
+/* =========================================================
+   CEK RASIO GAJI
+========================================================= */
+
+function updateDots(index){
+  const dots = testiDots.querySelectorAll("span");
+  dots.forEach((d,i)=>{
+    d.classList.toggle("active", i === index);
+  });
+}
+
+function setStatus(type, text, icon){
+  statusBox.className = "status " + type + " show";
+  statusBox.querySelector(".text").textContent = text;
+  statusBox.querySelector(".icon").textContent = icon;
+}
+
+function updateGaji(){
+  hitung();
+
+  const cicilan = getCicilan();
+
+  // 1️⃣ belum ada cicilan
+  if(!cicilan){
+    setStatus("idle","Masukkan data cicilan","💼");
+    financeBar.style.width = "0%";
+    ratioText.textContent = "0%";
+    return;
+  }
+
+  // 2️⃣ hitung gaji minimal
+  const gajiMinimal = Math.ceil(cicilan / 0.3);
+  gajiMinEl.textContent = "Rp " + formatRupiah(gajiMinimal);
+
+  // 3️⃣ belum aktif pasangan
+  if(!coupleToggle.checked){
+    setStatus("idle","Aktifkan & isi gaji pasangan","👨‍👩‍👧");
+    financeBar.style.width = "0%";
+    ratioText.textContent = "0%";
+    return;
+  }
+
+  // 4️⃣ ambil total gaji
+  const totalGaji =
+    cleanNumber(gajiSuamiEl.value) +
+    cleanNumber(gajiIstriEl.value);
+
+  if(!totalGaji){
+    setStatus("idle","Masukkan gaji pasangan","💰");
+    financeBar.style.width = "0%";
+    ratioText.textContent = "0%";
+    return;
+  }
+
+  // 5️⃣ analisa rasio
+  const rasio = cicilan / totalGaji;
+  const percent = Math.min(rasio * 100, 100);
+
+  financeBar.style.width = percent + "%";
+  ratioText.textContent = Math.round(percent) + "%";
+
+  if(rasio <= 0.3){
+    financeBar.className = "progress-fill safe";
+    setStatus("ok","Aman • Rasio cicilan sehat","✅");
+  }
+  else if(rasio <= 0.4){
+    financeBar.className = "progress-fill warn";
+    setStatus("warn","Kurang aman • Perlu pertimbangan","⚠️");
+  }
+  else{
+    financeBar.className = "progress-fill danger";
+    setStatus("bad","Berat • Risiko tinggi","❌");
+  }
+}
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+function updateProgress(){
+  const dp = Math.min(Math.max(dpEl.value,0),100);
+  dpBar.style.width = dp + "%";
+  dpVal.textContent = dp;
+
+  const tenor = Math.min(Math.max(tenorEl.value,1),30);
+  tenorBar.style.width = (tenor / 30 * 100) + "%";
+  tenorVal.textContent = tenor;
+}
+
+/* =========================================================
+   UPDATE SEMUA (REALTIME)
+========================================================= */
+function updateAll(){
+  hitung();
+  hitungBank();
+  updateProgress();
+  updateGaji();
+  generateAdvice();
+  generateUnitMatch();
+}
+
+/* =========================================================
+   EVENT INPUT
+========================================================= */
+[hargaEl, dpEl, tenorEl, bungaEl].forEach(el=>{
+  el.addEventListener("input",()=>{
+    if(el === hargaEl){
+      el.value = formatRupiah(cleanNumber(el.value));
+    }
+    updateAll();
+  });
+});
+
+[gajiEl, gajiSuamiEl, gajiIstriEl].forEach(el=>{
+  if(!el) return;
+  el.addEventListener("input",()=>{
+    el.value = formatRupiah(cleanNumber(el.value));
+    updateAll();
+  });
+});
+
+/* =========================================================
+   MODE PASANGAN
+========================================================= */
+coupleToggle.addEventListener("change",()=>{
+  coupleInput.classList.toggle("show", coupleToggle.checked);
+  updateAll();
+});
+
+/* =========================================================
+   MODAL
+========================================================= */
+function openLead(){
+  leadModal.classList.add("active");
+}
+function closeLead(e){
+  if(!e || e.target === leadModal){
+    leadModal.classList.remove("active");
+  }
+}
+
+/* =========================================================
+   WHATSAPP NORMALIZE
+========================================================= */
+function normalizeWA(input){
+  let wa = input.replace(/\D/g,"");
+  if(wa.startsWith("62")) wa = "0"+wa.slice(2);
+  if(!wa.startsWith("0")) return null;
+  if(wa.length < 10 || wa.length > 15) return null;
+  return wa;
+}
+
+/* =========================================================
+   SUBMIT LEAD
+========================================================= */
+const SHEET_API =
+"https://script.google.com/macros/s/AKfycbw5Ghfnu_J0_mVKsN5eUThmyZWU91zTs9ISOwqjP2szC2KHkBjBJWv7Ff0SygIAqhbA/exec";
+
+function submitLead(){
+  const nama = namaLead.value.trim();
+  const wa = normalizeWA(waLead.value.trim());
+  const harga = formatRupiah(cleanNumber(hargaEl.value));
+  const cicilan = hasil.textContent;
+
+  if(!nama || !wa){
+    alert("Nama & WhatsApp wajib diisi dengan benar");
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Mengirim...";
+
+  window.open(
+    "https://wa.me/6281802168184?text=" + encodeURIComponent(
+      "Halo, saya mau konsultasi KPR\n\n"+
+      "Nama: "+nama+"\n"+
+      "WhatsApp: "+wa+"\n"+
+      "Harga Rumah: Rp "+harga+"\n"+
+      "Cicilan: "+cicilan
+    ),
+    "_blank"
+  );
+
+  const fd = new FormData();
+  fd.append("nama", nama);
+  fd.append("wa", wa);
+  fd.append("harga", harga);
+  fd.append("cicilan", cicilan);
+
+  fetch(SHEET_API,{method:"POST",body:fd})
+    .finally(()=>{
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Kirim ke WhatsApp";
+      closeLead();
+    });
+}
+
+function getSaved(){
+  return JSON.parse(localStorage.getItem("kpr_saved") || "[]");
+}
+
+function saveSimulation(){
+  const data = {
+    waktu: new Date().toLocaleString("id-ID"),
+    harga: hargaEl.value,
+    cicilan: hasil.textContent,
+    gajiMin: gajiMinEl.textContent
+  };
+
+  const saved = getSaved();
+  saved.unshift(data);
+  localStorage.setItem("kpr_saved", JSON.stringify(saved));
+
+  renderSaved();
+  toggleSaved(true);
+}
+
+function toggleSaved(force){
+  if(force !== undefined){
+    savedListEl.classList.toggle("show", force);
+  }else{
+    savedListEl.classList.toggle("show");
+  }
+  renderSaved();
+}
+
+function renderSaved(){
+  const saved = getSaved();
+  if(!saved.length){
+    savedListEl.innerHTML = "<small>Belum ada simulasi tersimpan</small>";
+    return;
+  }
+
+  savedListEl.innerHTML = saved.map((s,i)=>`
+    <div class="saved-item">
+      <strong>${s.cicilan}</strong><br>
+      <small>Harga: Rp ${s.harga}</small><br>
+      <small>Gaji Min: ${s.gajiMin}</small><br>
+      <small>${s.waktu}</small>
+
+      <div class="saved-actions">
+        <button onclick="shareSaved(${i})">📤 Share</button>
+        <button onclick="deleteSaved(${i})">🗑️ Hapus</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function deleteSaved(i){
+  const saved = getSaved();
+  saved.splice(i,1);
+  localStorage.setItem("kpr_saved", JSON.stringify(saved));
+  renderSaved();
+}
+
+function shareSaved(i){
+  const s = getSaved()[i];
+  const text =
+`Simulasi KPR
+Harga Rumah: Rp ${s.harga}
+Cicilan: ${s.cicilan}
+Estimasi Gaji Minimal: ${s.gajiMin}`;
+
+  window.open(
+    "https://wa.me/?text="+encodeURIComponent(text),
+    "_blank"
+  );
+}
+
+renderSaved();
+
+function showAdvice(text){
+  smartAdviceEl.innerHTML = text;
+  smartAdviceEl.classList.add("show");
+}
+
+function hideAdvice(){
+  smartAdviceEl.classList.remove("show");
+}
+
+function generateAdvice(){
+  const cicilan = getCicilan();
+  if(!cicilan){
+    hideAdvice();
+    return;
+  }
+
+  const harga = cleanNumber(hargaEl.value);
+  const dpPersen = dpEl.value;
+  const tenor = tenorEl.value;
+
+  let totalGaji = coupleToggle.checked
+    ? cleanNumber(gajiSuamiEl.value) + cleanNumber(gajiIstriEl.value)
+    : 0;
+
+  const rasio = totalGaji ? cicilan / totalGaji : 1;
+
+  let advice = `<strong>💡 Saran Cerdas:</strong><br>`;
+
+  /* ===== LOGIC ===== */
+
+  if(dpPersen < 20){
+    advice += "• DP masih kecil. Naikkan DP ke <b>20–30%</b> agar cicilan lebih ringan.<br>";
+  }
+
+  if(tenor < 15){
+    advice += "• Tenor relatif pendek. Pertimbangkan <b>20–25 tahun</b> supaya cicilan turun.<br>";
+  }
+
+  if(rasio > 0.4){
+    advice += "• Rasio cicilan terlalu berat. Kombinasi <b>DP lebih besar + tenor lebih panjang</b> sangat disarankan.<br>";
+  }else if(rasio > 0.3){
+    advice += "• Cicilan masih aman tapi mepet. Sedikit penyesuaian bisa membuat finansial lebih nyaman.<br>";
+  }else{
+    advice += "• Kondisi finansial tergolong <b>sehat & aman</b>. Anda siap ambil unit ini 👍<br>";
+  }
+
+  advice += "<br><small>Simulasi ini bersifat estimasi.</small>";
+
+  showAdvice(advice);
+}
+
+function generateUnitMatch(){
+  const cicilan = getCicilan();
+  if(!cicilan){
+    unitMatchEl.style.display = "none";
+    return;
+  }
+
+  let totalGaji = coupleToggle.checked
+    ? cleanNumber(gajiSuamiEl.value) + cleanNumber(gajiIstriEl.value)
+    : 0;
+
+  if(!totalGaji){
+    unitMatchEl.style.display = "none";
+    return;
+  }
+
+  const rasio = cicilan / totalGaji;
+
+  unitMatchEl.style.display = "block";
+  unitMatchEl.className = "unit-match";
+
+  if(rasio <= 0.3){
+    unitMatchEl.classList.add("good");
+    unitMatchEl.innerHTML = `
+      <span class="badge good">SANGAT COCOK</span>
+      <h4>Unit ini cocok dengan profil Anda</h4>
+      <p>
+        Cicilan masih dalam batas aman.
+        Unit ini realistis untuk jangka panjang
+        dan minim risiko finansial.
+      </p>
+    `;
+  }
+  else if(rasio <= 0.4){
+    unitMatchEl.classList.add("mid");
+    unitMatchEl.innerHTML = `
+      <span class="badge mid">CUKUP COCOK</span>
+      <h4>Unit masih bisa dipertimbangkan</h4>
+      <p>
+        Cicilan masih memungkinkan,
+        namun perlu perencanaan yang lebih matang
+        agar tetap nyaman ke depannya.
+      </p>
+    `;
+  }
+  else{
+    unitMatchEl.classList.add("bad");
+    unitMatchEl.innerHTML = `
+      <span class="badge bad">KURANG COCOK</span>
+      <h4>Unit ini cukup berat untuk profil Anda</h4>
+      <p>
+        Beban cicilan terlalu tinggi.
+        Disarankan memilih unit lain
+        atau menyesuaikan DP & tenor.
+      </p>
+    `;
+  }
+}
+
+/* ===============================
+   TESTIMONI SLIDER
+================================ */
+let testiIndex = 0;
+let autoTimer;
+let startX = 0;
+let allowScroll = true;
+
+function startAuto(){
+  stopAuto();
+  autoTimer = setInterval(()=>{
+    allowScroll = false;
+    showTesti((testiIndex + 1) % testiItems.length);
+  }, 6600);
+}
+
+function stopAuto(){
+  if(autoTimer) clearInterval(autoTimer);
+}
+
+startAuto();
+
+slider.addEventListener("touchstart",e=>{
+  startX = e.touches[0].clientX;
+  stopAuto();
+});
+
+slider.addEventListener("touchend",e=>{
+  const endX = e.changedTouches[0].clientX;
+  const diff = startX - endX;
+
+  allowScroll = true;
+
+  if(Math.abs(diff) > 50){
+    if(diff > 0){
+      showTesti((testiIndex + 1) % testiItems.length);
+    }else{
+      showTesti((testiIndex - 1 + testiItems.length) % testiItems.length);
+    }
+  }
+  startAuto();
+});
+
+/* CREATE DOT */
+testiItems.forEach((_,i)=>{
+  const dot = document.createElement("span");
+  if(i===0) dot.classList.add("active");
+  dot.onclick = ()=>{
+  stopAuto();
+  allowScroll = true;
+  showTesti(i);
+  startAuto();
+};
+  testiDots.appendChild(dot);
+});
+
+function showTesti(i){
+  testiItems.forEach(item=>item.classList.remove("active"));
+  testiDots.querySelectorAll("span").forEach(dot=>dot.classList.remove("active"));
+
+  testiIndex = i;
+
+  testiItems[testiIndex].classList.add("active");
+  testiDots.children[testiIndex].classList.add("active");
+
+  if(allowScroll){
+    testiItems[testiIndex].scrollIntoView({
+      behavior:"smooth",
+      inline:"center",
+      block:"nearest"
+    });
+  }
+}
+
+/* AUTO PLAY */
+setInterval(()=>{
+  let next = testiIndex + 1;
+  if(next >= testiItems.length) next = 0;
+  showTesti(next);
+}, 6600);
+
+/* =========================================================
+   INIT
+========================================================= */
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+initDefault();
+updateAll();
+</script>
+</body>
+</html>
