@@ -6,133 +6,188 @@
 <title>Nour Maandhito | Personal Branding & Website Profesional</title>
 
 <style>
+/* ================= DESIGN SYSTEM 2026 ================= */
 :root{
-  --bg:#0c0f16;
-  --glass:rgba(255,255,255,.07);
-  --text:#eef0ff;
+  --bg:#0b0e14;
+  --bg-soft:#12162a;
+  --glass:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.12);
+  --text:#f1f3ff;
   --muted:#a6accd;
   --accent:#5b7cff;
+  --accent-soft:#8aa2ff;
   --radius:22px;
 }
 
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:radial-gradient(1200px 600px at top,#1b2044,var(--bg));
+  background:
+    radial-gradient(900px 500px at top,#1b214a,transparent),
+    var(--bg);
   color:var(--text);
-  line-height:1.7;
+  line-height:1.75;
 }
 
+/* CONTAINER */
 .container{
-  max-width:1120px;
+  max-width:1140px;
   margin:auto;
   padding:28px;
 }
 
 a{text-decoration:none;color:inherit}
 
-/* ===== HERO ===== */
+/* ================= NAVBAR ================= */
+.nav{
+  position:sticky;
+  top:16px;
+  z-index:50;
+  margin-bottom:40px;
+}
+
+.nav-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 22px;
+  border-radius:999px;
+  background:linear-gradient(180deg,var(--glass),transparent);
+  backdrop-filter:blur(16px);
+  border:1px solid var(--border);
+}
+
+.nav strong{
+  font-weight:700;
+  letter-spacing:.3px;
+}
+
+.nav a{
+  margin-left:20px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+.nav a:hover{color:var(--text)}
+
+/* ================= HERO ================= */
 .hero{
   display:grid;
   grid-template-columns:1.2fr .8fr;
-  gap:50px;
+  gap:60px;
   align-items:center;
-  padding:100px 0 80px;
+  padding:110px 0 90px;
 }
 
 .hero h1{
-  font-size:clamp(34px,6vw,56px);
+  font-size:clamp(36px,6vw,58px);
   font-weight:800;
+  letter-spacing:-0.6px;
 }
 
-.hero span{color:var(--accent)}
+.hero span{
+  background:linear-gradient(135deg,var(--accent),var(--accent-soft));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
 .hero p{
   color:var(--muted);
   font-size:18px;
-  max-width:600px;
-  margin:18px 0 26px;
+  max-width:620px;
+  margin:22px 0 30px;
 }
 
+/* BUTTON */
 .btn{
   display:inline-flex;
   align-items:center;
   gap:10px;
-  background:linear-gradient(135deg,var(--accent),#8aa2ff);
+  background:linear-gradient(135deg,var(--accent),var(--accent-soft));
   color:#fff;
-  padding:15px 26px;
+  padding:15px 28px;
   border-radius:999px;
   font-weight:600;
+  box-shadow:0 12px 30px rgba(91,124,255,.35);
+  transition:.3s;
 }
 
-/* FOTO */
-.hero-photo{
-  position:relative;
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 40px rgba(91,124,255,.45);
 }
 
-.hero-photo img{
-  width:100%;
-  max-width:360px;
-  border-radius:30px;
-  object-fit:cover;
-  box-shadow:0 30px 80px rgba(0,0,0,.45);
-}
-
-/* ===== SECTION ===== */
-section{margin-top:110px}
+/* ================= SECTION ================= */
+section{margin-top:120px}
 
 .section-title{
-  font-size:30px;
-  margin-bottom:30px;
+  font-size:32px;
+  margin-bottom:34px;
+  letter-spacing:-.3px;
 }
 
-/* ===== GRID & CARD ===== */
+/* ================= GRID & CARD ================= */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px;
+  gap:26px;
 }
 
 .card{
-  background:linear-gradient(180deg,rgba(255,255,255,.08),transparent);
-  border:1px solid rgba(255,255,255,.1);
-  backdrop-filter:blur(16px);
+  background:linear-gradient(180deg,var(--glass),transparent);
+  border:1px solid var(--border);
+  backdrop-filter:blur(18px);
   border-radius:var(--radius);
-  padding:26px;
+  padding:28px;
   transition:.4s;
 }
 
 .card:hover{
-  transform:translateY(-8px);
+  transform:translateY(-10px);
   border-color:rgba(91,124,255,.6);
 }
 
-.card h3{margin-bottom:12px}
-.card p{color:var(--muted);font-size:15px}
+.card h3{
+  margin-bottom:14px;
+  font-size:18px;
+}
 
-/* ===== CTA ===== */
+.card p{
+  color:var(--muted);
+  font-size:15px;
+}
+
+/* ================= CTA ================= */
 .cta{
-  margin:120px 0 70px;
-  padding:60px 28px;
+  margin:140px 0 80px;
+  padding:70px 30px;
   text-align:center;
-  background:linear-gradient(135deg,#1c214a,#0f1226);
-  border-radius:32px;
-  border:1px solid rgba(255,255,255,.1);
+  background:
+    radial-gradient(600px 300px at top,#2a3470,transparent),
+    var(--bg-soft);
+  border-radius:36px;
+  border:1px solid var(--border);
+}
+
+.cta h2{
+  font-size:32px;
+  margin-bottom:16px;
 }
 
 footer{
   text-align:center;
   color:var(--muted);
-  padding:36px 0;
+  padding:40px 0;
   font-size:14px;
 }
 
-/* ===== SCROLL EFFECT ===== */
+/* ================= SCROLL EFFECT ================= */
 .reveal{
   opacity:0;
-  transform:translateY(40px);
-  transition:all .8s ease;
+  transform:translateY(40px) scale(.98);
+  transition:all .9s cubic-bezier(.2,.7,.2,1);
 }
 
 .reveal.show{
@@ -140,14 +195,15 @@ footer{
   transform:none;
 }
 
-/* RESPONSIVE */
+/* ================= RESPONSIVE ================= */
 @media(max-width:900px){
   .hero{
     grid-template-columns:1fr;
     text-align:center;
   }
-  .hero-photo img{
-    margin:auto;
+  .nav-inner{
+    justify-content:center;
+    gap:18px;
   }
 }
 </style>
@@ -156,75 +212,86 @@ footer{
 <body>
 <div class="container">
 
-  <!-- HERO -->
-  <section class="hero reveal">
+<!-- NAVBAR -->
+<div class="nav reveal">
+  <div class="nav-inner">
+    <strong>Nour Maandhito</strong>
     <div>
-      <h1>
-        Nour Maandhito<br>
-        <span>Personal Branding & Website Profesional</span>
-      </h1>
-      <p>
-        Membantu personal brand, bisnis, dan marketing property
-        tampil profesional melalui website modern yang fokus
-        ke kepercayaan dan hasil.
-      </p>
-      <a class="btn" href="https://wa.me/6281802168184" target="_blank">
-        💬 Konsultasi WhatsApp
-      </a>
+      <a href="index.html">Home</a>
+      <a href="company.html">Company</a>
+      <a href="kpr.html">Kalkulator KPR</a>
     </div>
+  </div>
+</div>
 
-  </section>
-
-  <!-- ABOUT -->
-  <section class="reveal">
-    <h2 class="section-title">Tentang Saya</h2>
-    <div class="card">
-      <p>
-        Saya adalah profesional digital yang membantu personal brand,
-        bisnis, dan marketing property membangun kepercayaan
-        melalui website modern, rapi, dan siap digunakan untuk
-        branding maupun closing.
-      </p>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="reveal">
-    <h2 class="section-title">Layanan</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>🏠 Marketing Property</h3>
-        <p>Website & landing page property untuk meningkatkan closing.</p>
-      </div>
-      <div class="card">
-        <h3>🏢 Company Profile</h3>
-        <p>Website profesional untuk perusahaan & UMKM.</p>
-      </div>
-      <div class="card">
-        <h3>👤 Personal Branding</h3>
-        <p>Website personal untuk agen, konsultan, & profesional.</p>
-      </div>
-      <div class="card">
-        <h3>📊 Custom Tools</h3>
-        <p>Kalkulator, form leads, integrasi WhatsApp.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <div class="cta reveal">
-    <h2>Siap tampil profesional di dunia digital?</h2>
-    <p style="color:var(--muted);margin:16px 0">
-      Konsultasi gratis • Fokus solusi
+<!-- HERO -->
+<section class="hero reveal">
+  <div>
+    <h1>
+      Nour Maandhito<br>
+      <span>Personal Branding & Website Profesional</span>
+    </h1>
+    <p>
+      Membantu personal brand, bisnis, dan marketing property
+      tampil profesional melalui website modern
+      yang fokus ke kepercayaan dan hasil.
     </p>
     <a class="btn" href="https://wa.me/6281802168184" target="_blank">
-      🚀 Mulai Sekarang
+      💬 Konsultasi WhatsApp
     </a>
   </div>
+</section>
 
-  <footer class="reveal">
-    © 2026 Nour Maandhito • Personal Branding Website
-  </footer>
+<!-- ABOUT -->
+<section class="reveal">
+  <h2 class="section-title">Tentang Saya</h2>
+  <div class="card">
+    <p>
+      Saya adalah profesional digital yang membantu personal brand,
+      bisnis, dan marketing property membangun kepercayaan
+      melalui website modern, rapi, dan siap digunakan
+      untuk branding maupun closing.
+    </p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="reveal">
+  <h2 class="section-title">Layanan</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>🏠 Marketing Property</h3>
+      <p>Website & landing page property untuk meningkatkan closing.</p>
+    </div>
+    <div class="card">
+      <h3>🏢 Company Profile</h3>
+      <p>Website profesional untuk perusahaan & UMKM.</p>
+    </div>
+    <div class="card">
+      <h3>👤 Personal Branding</h3>
+      <p>Website personal untuk agen, konsultan, & profesional.</p>
+    </div>
+    <div class="card">
+      <h3>📊 Custom Tools</h3>
+      <p>Kalkulator, form leads, integrasi WhatsApp.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta reveal">
+  <h2>Siap tampil profesional di dunia digital?</h2>
+  <p style="color:var(--muted);margin:18px 0">
+    Konsultasi gratis • Fokus solusi • Tanpa ribet
+  </p>
+  <a class="btn" href="https://wa.me/6281802168184" target="_blank">
+    🚀 Mulai Sekarang
+  </a>
+</div>
+
+<footer class="reveal">
+  © 2026 Nour Maandhito • Personal Branding Website
+</footer>
 
 </div>
 
