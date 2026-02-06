@@ -1,221 +1,249 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nour Maandhito | Personal Branding & Website Profesional</title>
-  <meta name="description" content="Personal Branding Nour Maandhito — Website Property, Company Profile, & Digital Branding">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nour Maandhito | Personal Branding & Website Profesional</title>
 
-  <style>
-    :root{
-      --bg:#0c0f16;
-      --glass:rgba(255,255,255,.06);
-      --text:#eef0ff;
-      --muted:#a6accd;
-      --accent:#5b7cff;
-      --radius:20px;
-    }
+<style>
+:root{
+  --bg:#0c0f16;
+  --glass:rgba(255,255,255,.07);
+  --text:#eef0ff;
+  --muted:#a6accd;
+  --accent:#5b7cff;
+  --radius:22px;
+}
 
-    *{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box}
 
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:radial-gradient(1200px 600px at top,#1b2044,var(--bg));
-      color:var(--text);
-      line-height:1.7;
-    }
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:radial-gradient(1200px 600px at top,#1b2044,var(--bg));
+  color:var(--text);
+  line-height:1.7;
+}
 
-    .container{
-      max-width:1120px;
-      margin:auto;
-      padding:28px;
-    }
+.container{
+  max-width:1120px;
+  margin:auto;
+  padding:28px;
+}
 
-    a{text-decoration:none;color:inherit}
+a{text-decoration:none;color:inherit}
 
-    /* HERO */
-    .hero{
-      padding:90px 0 70px;
-      display:grid;
-      gap:26px;
-    }
+/* ===== HERO ===== */
+.hero{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:50px;
+  align-items:center;
+  padding:100px 0 80px;
+}
 
-    .hero h1{
-      font-size:clamp(34px,6vw,58px);
-      font-weight:800;
-      letter-spacing:-0.6px;
-    }
+.hero h1{
+  font-size:clamp(34px,6vw,56px);
+  font-weight:800;
+}
 
-    .hero span{
-      color:var(--accent);
-    }
+.hero span{color:var(--accent)}
 
-    .hero p{
-      max-width:640px;
-      font-size:18px;
-      color:var(--muted);
-    }
+.hero p{
+  color:var(--muted);
+  font-size:18px;
+  max-width:600px;
+  margin:18px 0 26px;
+}
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      background:linear-gradient(135deg,var(--accent),#8aa2ff);
-      color:#fff;
-      padding:15px 24px;
-      border-radius:999px;
-      font-weight:600;
-      width:fit-content;
-    }
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:linear-gradient(135deg,var(--accent),#8aa2ff);
+  color:#fff;
+  padding:15px 26px;
+  border-radius:999px;
+  font-weight:600;
+}
 
-    /* SECTION */
-    section{margin-top:90px}
+/* FOTO */
+.hero-photo{
+  position:relative;
+}
 
-    .section-title{
-      font-size:30px;
-      margin-bottom:28px;
-    }
+.hero-photo img{
+  width:100%;
+  max-width:360px;
+  border-radius:30px;
+  object-fit:cover;
+  box-shadow:0 30px 80px rgba(0,0,0,.45);
+}
 
-    /* GRID */
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:22px;
-    }
+/* ===== SECTION ===== */
+section{margin-top:110px}
 
-    .card{
-      background:linear-gradient(180deg,rgba(255,255,255,.08),transparent);
-      border:1px solid rgba(255,255,255,.1);
-      backdrop-filter:blur(16px);
-      border-radius:var(--radius);
-      padding:26px;
-      transition:.35s;
-    }
+.section-title{
+  font-size:30px;
+  margin-bottom:30px;
+}
 
-    .card:hover{
-      transform:translateY(-8px);
-      border-color:rgba(91,124,255,.6);
-    }
+/* ===== GRID & CARD ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+}
 
-    .card h3{
-      margin-bottom:12px;
-      font-size:20px;
-    }
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.08),transparent);
+  border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(16px);
+  border-radius:var(--radius);
+  padding:26px;
+  transition:.4s;
+}
 
-    .card p{
-      font-size:15px;
-      color:var(--muted);
-    }
+.card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(91,124,255,.6);
+}
 
-    /* CTA */
-    .cta{
-      margin:110px 0 60px;
-      padding:56px 28px;
-      text-align:center;
-      background:linear-gradient(135deg,#1c214a,#0f1226);
-      border-radius:30px;
-      border:1px solid rgba(255,255,255,.1);
-    }
+.card h3{margin-bottom:12px}
+.card p{color:var(--muted);font-size:15px}
 
-    footer{
-      text-align:center;
-      color:var(--muted);
-      padding:36px 0;
-      font-size:14px;
-    }
-  </style>
+/* ===== CTA ===== */
+.cta{
+  margin:120px 0 70px;
+  padding:60px 28px;
+  text-align:center;
+  background:linear-gradient(135deg,#1c214a,#0f1226);
+  border-radius:32px;
+  border:1px solid rgba(255,255,255,.1);
+}
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:36px 0;
+  font-size:14px;
+}
+
+/* ===== SCROLL EFFECT ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:all .8s ease;
+}
+
+.reveal.show{
+  opacity:1;
+  transform:none;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+  .hero-photo img{
+    margin:auto;
+  }
+}
+</style>
 </head>
 
 <body>
 <div class="container">
 
   <!-- HERO -->
-  <section class="hero">
-    <h1>
-      Nour Maandhito<br>
-      <span>Personal Branding & Website Profesional</span>
-    </h1>
-    <p>
-      Membantu personal brand, bisnis, dan marketing property
-      tampil profesional melalui website modern, strategi digital,
-      dan pendekatan yang fokus ke kepercayaan & hasil.
-    </p>
-    <a class="btn" href="https://wa.me/62XXXXXXXXXX" target="_blank">
-      💬 Konsultasi via WhatsApp
-    </a>
+  <section class="hero reveal">
+    <div>
+      <h1>
+        Nour Maandhito<br>
+        <span>Personal Branding & Website Profesional</span>
+      </h1>
+      <p>
+        Membantu personal brand, bisnis, dan marketing property
+        tampil profesional melalui website modern yang fokus
+        ke kepercayaan dan hasil.
+      </p>k
+      <a class="btn" href="https://wa.me/6281802168184" target="_blank">
+        💬 Konsultasi WhatsApp
+      </a>
+    </div>
+
+    <div class="hero-photo">
+      <img src="foto.jpg" alt="Nour Maandhito">
+    </div>
   </section>
 
   <!-- ABOUT -->
-  <section>
+  <section class="reveal">
     <h2 class="section-title">Tentang Saya</h2>
     <div class="card">
       <p>
-        Saya adalah profesional digital & marketing property
-        yang fokus membangun kepercayaan melalui website.
-        Mulai dari website property, company profile,
-        hingga personal branding — semuanya dirancang modern,
-        rapi, dan siap digunakan untuk jualan maupun branding.
+        Saya adalah profesional digital yang membantu personal brand,
+        bisnis, dan marketing property membangun kepercayaan
+        melalui website modern, rapi, dan siap digunakan untuk
+        branding maupun closing.
       </p>
     </div>
   </section>
 
   <!-- SERVICES -->
-  <section>
+  <section class="reveal">
     <h2 class="section-title">Layanan</h2>
     <div class="grid">
       <div class="card">
         <h3>🏠 Marketing Property</h3>
-        <p>Website & landing page property untuk meningkatkan kepercayaan dan closing.</p>
+        <p>Website & landing page property untuk meningkatkan closing.</p>
       </div>
       <div class="card">
         <h3>🏢 Company Profile</h3>
-        <p>Website profesional untuk perusahaan, UMKM, dan bisnis jasa.</p>
+        <p>Website profesional untuk perusahaan & UMKM.</p>
       </div>
       <div class="card">
         <h3>👤 Personal Branding</h3>
-        <p>Website personal untuk agen, konsultan, dan profesional.</p>
+        <p>Website personal untuk agen, konsultan, & profesional.</p>
       </div>
       <div class="card">
-        <h3>📊 Tools & Fitur</h3>
-        <p>Kalkulator KPR, form leads, integrasi WhatsApp & Google Sheet.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO -->
-  <section>
-    <h2 class="section-title">Contoh Project</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Website Property</h3>
-        <p>Landing page + simulasi KPR + WhatsApp.</p>
-      </div>
-      <div class="card">
-        <h3>Company Profile</h3>
-        <p>Website bisnis modern, mobile friendly, dan profesional.</p>
-      </div>
-      <div class="card">
-        <h3>Personal Branding</h3>
-        <p>Website personal untuk agen & konsultan.</p>
+        <h3>📊 Custom Tools</h3>
+        <p>Kalkulator, form leads, integrasi WhatsApp.</p>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <div class="cta">
-    <h2>Siap bantu kamu tampil profesional di dunia digital</h2>
+  <div class="cta reveal">
+    <h2>Siap tampil profesional di dunia digital?</h2>
     <p style="color:var(--muted);margin:16px 0">
-      Konsultasi gratis • Tanpa ribet • Fokus hasil
+      Konsultasi gratis • Fokus solusi
     </p>
     <a class="btn" href="https://wa.me/6281802168184" target="_blank">
-      🚀 Mulai Konsultasi
+      🚀 Mulai Sekarang
     </a>
   </div>
 
-  <footer>
+  <footer class="reveal">
     © 2026 Nour Maandhito • Personal Branding Website
   </footer>
 
 </div>
+
+<script>
+const reveals = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+},{threshold:0.15});
+
+reveals.forEach(el=>observer.observe(el));
+</script>
+
 </body>
 </html>
