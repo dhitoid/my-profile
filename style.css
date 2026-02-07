@@ -126,3 +126,24 @@ footer{
 @media(max-width:600px){
   .section h2{font-size:28px}
 }
+
+.portfolio-thumb{
+  height:190px;
+  border-radius:16px;
+  background-size:cover;
+  background-position:top center;
+  position:relative;
+  overflow:hidden;
+}
+
+.portfolio-thumb::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.55),
+    rgba(0,0,0,.05)
+  );
+}
+
