@@ -147,3 +147,11 @@ footer{
   );
 }
 
+.portfolio-link{
+  text-decoration:none;
+  color:inherit;
+}
+
+.portfolio-link:hover .card{
+  transform:translateY(-10px);
+}
