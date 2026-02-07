@@ -224,6 +224,65 @@ footer{
 @media(max-width:800px){
   .hero{text-align:center}
 }
+
+/* ================= CIRCULAR STATS ================= */
+.stats-circle{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:40px;
+  justify-items:center;
+}
+
+.circle{
+  position:relative;
+  width:160px;
+  height:200px;
+  text-align:center;
+}
+
+.circle svg{
+  width:160px;
+  height:160px;
+  transform:rotate(-90deg);
+}
+
+circle{
+  fill:none;
+  stroke-width:10;
+}
+
+circle.bg{
+  stroke:rgba(255,255,255,.12);
+}
+
+circle.progress{
+  stroke:var(--accent);
+  stroke-linecap:round;
+  stroke-dasharray:327;
+  stroke-dashoffset:327;
+  filter:drop-shadow(0 0 12px rgba(91,124,255,.7));
+  transition:stroke-dashoffset .3s;
+}
+
+.circle strong{
+  position:absolute;
+  top:48px;
+  left:0;
+  right:0;
+  font-size:28px;
+  font-weight:700;
+  background:linear-gradient(135deg,var(--accent),var(--accent-soft));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.circle span{
+  display:block;
+  margin-top:12px;
+  font-size:14px;
+  color:var(--muted);
+}
+
 </style>
 </head>
 
@@ -260,23 +319,48 @@ footer{
 
 <!-- STATS -->
 <section class="reveal">
-  <div class="stats">
-    <div class="stat">
-      <strong data-target="50">0</strong>
+  <div class="stats-circle">
+
+    <div class="circle">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg" cx="60" cy="60" r="52"/>
+        <circle class="progress" cx="60" cy="60" r="52"
+          data-target="50"/>
+      </svg>
+      <strong>0</strong>
       <span>Project Website</span>
     </div>
-    <div class="stat">
-      <strong data-target="100">0</strong>
-      <span>% Custom Design</span>
+
+    <div class="circle">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg" cx="60" cy="60" r="52"/>
+        <circle class="progress" cx="60" cy="60" r="52"
+          data-target="100"/>
+      </svg>
+      <strong>0%</strong>
+      <span>Custom Design</span>
     </div>
-    <div class="stat">
-      <strong data-target="98">0</strong>
-      <span>% Client Satisfaction</span>
+
+    <div class="circle">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg" cx="60" cy="60" r="52"/>
+        <circle class="progress" cx="60" cy="60" r="52"
+          data-target="98"/>
+      </svg>
+      <strong>0%</strong>
+      <span>Client Satisfaction</span>
     </div>
-    <div class="stat">
-      <strong data-target="24">0</strong>
+
+    <div class="circle">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg" cx="60" cy="60" r="52"/>
+        <circle class="progress" cx="60" cy="60" r="52"
+          data-target="24"/>
+      </svg>
+      <strong>0</strong>
       <span>Jam Support</span>
     </div>
+
   </div>
 </section>
 
@@ -321,61 +405,64 @@ footer{
 
 <script>
 /* ================= REVEAL ================= */
-const reveals = document.querySelectorAll(".reveal");
-const revealObs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("show");
-  });
+const reveals=document.querySelectorAll(".reveal");
+const revealObs=new IntersectionObserver(e=>{
+  e.forEach(i=>i.isIntersecting&&i.target.classList.add("show"));
 },{threshold:.15});
 reveals.forEach(el=>revealObs.observe(el));
 
-/* ================= COUNT RESET SYSTEM ================= */
-const statsSection = document.querySelector(".stats");
-const counters = document.querySelectorAll(".stat strong");
-let animated = false;
+/* ================= CIRCLE PROGRESS SYSTEM ================= */
+const stats=document.querySelector(".stats-circle");
+const circles=document.querySelectorAll(".circle");
+let played=false;
 
-function resetCounters(){
-  counters.forEach(c=>{
-    c.textContent = "0";
+function resetCircles(){
+  circles.forEach(c=>{
+    const prog=c.querySelector(".progress");
+    const num=c.querySelector("strong");
+    prog.style.strokeDashoffset=327;
+    num.textContent=num.textContent.includes('%')?'0%':'0';
   });
-  animated = false;
+  played=false;
 }
 
-function animateCounters(){
-  if(animated) return;
-  animated = true;
+function animateCircles(){
+  if(played) return;
+  played=true;
 
-  counters.forEach(counter=>{
-    const target = +counter.dataset.target;
-    let value = 0;
-    const step = Math.max(1, target / 60);
+  circles.forEach(circle=>{
+    const prog=circle.querySelector(".progress");
+    const num=circle.querySelector("strong");
+    const target=+prog.dataset.target;
+    const isPercent=num.textContent.includes('%');
+    let val=0;
 
-    const interval = setInterval(()=>{
-      value += step;
-      if(value >= target){
-        counter.textContent = target;
+    const interval=setInterval(()=>{
+      val++;
+      const offset=327-(327*(val/target));
+      prog.style.strokeDashoffset=Math.max(offset,0);
+
+      if(val>=target){
+        num.textContent=isPercent?target+'%':target;
         clearInterval(interval);
       }else{
-        counter.textContent = Math.floor(value);
+        num.textContent=isPercent?val+'%':val;
       }
-    }, 20);
+    },18);
   });
 }
 
-/* OBSERVER UNTUK STATS */
-const statsObserver = new IntersectionObserver(entries=>{
+const statsObs=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
-      animateCounters(); // masuk area
+      animateCircles();   // masuk
     }else{
-      resetCounters();   // keluar area
+      resetCircles();     // keluar
     }
   });
-},{
-  threshold:0.6 // harus benar2 stay di area stats
-});
+},{threshold:.6});
 
-statsObserver.observe(statsSection);
+statsObs.observe(stats);
 
 /* SLIDER */
 const slides=document.querySelector(".slides");
