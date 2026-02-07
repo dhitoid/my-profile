@@ -6,7 +6,6 @@
 <title>Nour Maandhito | Digital Branding Specialist</title>
 
 <style>
-/* ================= PREMIUM DESIGN SYSTEM 2026 ================= */
 :root{
   --bg:#0b0e14;
   --bg-soft:#12162a;
@@ -16,25 +15,22 @@
   --muted:#a6accd;
   --accent:#5b7cff;
   --accent-soft:#9bb0ff;
-  --radius:24px;
+  --radius:26px;
 }
 
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
-
 html{scroll-behavior:smooth}
 
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:
     radial-gradient(1000px 600px at top,#1b214a,transparent),
-    radial-gradient(600px 400px at bottom right,#1a2044,transparent),
+    radial-gradient(700px 400px at bottom right,#1a2044,transparent),
     var(--bg);
   color:var(--text);
   line-height:1.75;
 }
 
-/* CONTAINER */
 .container{
   max-width:1180px;
   margin:auto;
@@ -43,7 +39,7 @@ body{
 
 a{text-decoration:none;color:inherit}
 
-/* ================= NAVBAR ================= */
+/* ================= NAV ================= */
 .nav{
   position:sticky;
   top:18px;
@@ -61,45 +57,24 @@ a{text-decoration:none;color:inherit}
   border:1px solid var(--border);
 }
 
-.nav strong{
-  font-weight:700;
-  letter-spacing:.3px;
-}
-
 .nav a{
   margin-left:22px;
   font-size:14px;
   color:var(--muted);
-  position:relative;
-}
-
-.nav a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:0;
-  height:2px;
-  background:var(--accent);
-  transition:.3s;
 }
 
 .nav a:hover{color:var(--text)}
-.nav a:hover::after{width:100%}
 
 /* ================= HERO ================= */
 .hero{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:70px;
-  align-items:center;
-  padding:120px 0 100px;
+  padding:140px 0 120px;
+  max-width:820px;
 }
 
 .hero h1{
-  font-size:clamp(38px,6vw,60px);
+  font-size:clamp(40px,6vw,64px);
   font-weight:800;
-  letter-spacing:-0.7px;
+  letter-spacing:-.7px;
 }
 
 .hero span{
@@ -111,20 +86,7 @@ a{text-decoration:none;color:inherit}
 .hero p{
   color:var(--muted);
   font-size:18px;
-  max-width:620px;
-  margin:26px 0 34px;
-}
-
-/* HERO IMAGE */
-.hero-img{
-  position:relative;
-}
-
-.hero-img img{
-  width:100%;
-  border-radius:32px;
-  border:1px solid var(--border);
-  box-shadow:0 40px 120px rgba(0,0,0,.55);
+  margin:26px 0 36px;
 }
 
 /* BUTTON */
@@ -134,78 +96,102 @@ a{text-decoration:none;color:inherit}
   gap:10px;
   background:linear-gradient(135deg,var(--accent),var(--accent-soft));
   color:#fff;
-  padding:16px 32px;
+  padding:16px 34px;
   border-radius:999px;
   font-weight:600;
-  box-shadow:0 14px 36px rgba(91,124,255,.35);
+  box-shadow:0 14px 40px rgba(91,124,255,.45);
   transition:.35s;
 }
 
 .btn:hover{
   transform:translateY(-3px);
-  box-shadow:0 22px 50px rgba(91,124,255,.5);
+  box-shadow:0 24px 60px rgba(91,124,255,.6);
 }
 
 /* ================= SECTION ================= */
-section{margin-top:140px}
-
+section{margin-top:150px}
 .section-title{
   font-size:34px;
-  margin-bottom:36px;
-  letter-spacing:-.4px;
+  margin-bottom:40px;
 }
 
-/* ================= GRID & CARD ================= */
-.grid{
+/* ================= STATS ================= */
+.stats{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:28px;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:30px;
 }
 
-.card{
+.stat{
+  text-align:center;
+  padding:34px;
+  border-radius:var(--radius);
   background:linear-gradient(180deg,var(--glass),transparent);
   border:1px solid var(--border);
-  backdrop-filter:blur(18px);
-  border-radius:var(--radius);
-  padding:30px;
-  transition:.45s;
 }
 
-.card:hover{
-  transform:translateY(-12px);
-  border-color:rgba(91,124,255,.6);
-  box-shadow:0 20px 60px rgba(0,0,0,.45);
+.stat strong{
+  font-size:40px;
+  display:block;
+  background:linear-gradient(135deg,var(--accent),var(--accent-soft));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 20px rgba(91,124,255,.6);
 }
 
-.card h3{
-  margin-bottom:14px;
-  font-size:18px;
-}
-
-.card p{
+.stat span{
   color:var(--muted);
+  font-size:14px;
+}
+
+/* ================= TESTIMONI ================= */
+.slider{
+  position:relative;
+  overflow:hidden;
+}
+
+.slides{
+  display:flex;
+  transition:.6s ease;
+}
+
+.testi{
+  min-width:100%;
+  padding:36px;
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,var(--glass),transparent);
+  border:1px solid var(--border);
+}
+
+.testi p{
+  color:var(--muted);
+  font-size:16px;
+  margin-bottom:16px;
+}
+
+.testi strong{
   font-size:15px;
 }
 
-/* ================= TRUST ================= */
-.trust{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:26px;
+/* DOTS */
+.dots{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:20px;
 }
 
-.trust div{
-  padding:26px;
-  text-align:center;
-  border-radius:var(--radius);
-  background:linear-gradient(180deg,var(--glass),transparent);
-  border:1px solid var(--border);
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:rgba(255,255,255,.25);
+  cursor:pointer;
 }
 
-.trust strong{
-  font-size:28px;
-  display:block;
-  margin-bottom:6px;
+.dot.active{
+  background:var(--accent);
+  box-shadow:0 0 12px var(--accent);
 }
 
 /* ================= CTA ================= */
@@ -216,16 +202,10 @@ section{margin-top:140px}
   background:
     radial-gradient(700px 350px at top,#2a3470,transparent),
     var(--bg-soft);
-  border-radius:40px;
+  border-radius:42px;
   border:1px solid var(--border);
 }
 
-.cta h2{
-  font-size:34px;
-  margin-bottom:18px;
-}
-
-/* FOOTER */
 footer{
   text-align:center;
   color:var(--muted);
@@ -233,26 +213,16 @@ footer{
   font-size:14px;
 }
 
-/* ================= SCROLL REVEAL ================= */
+/* ================= SCROLL ================= */
 .reveal{
   opacity:0;
-  transform:translateY(50px) scale(.97);
-  transition:all 1s cubic-bezier(.2,.7,.2,1);
+  transform:translateY(50px);
+  transition:1s cubic-bezier(.2,.7,.2,1);
 }
+.reveal.show{opacity:1;transform:none}
 
-.reveal.show{
-  opacity:1;
-  transform:none;
-}
-
-/* ================= RESPONSIVE ================= */
-@media(max-width:900px){
-  .hero{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
-  .hero-img{max-width:420px;margin:auto}
-  .nav-inner{justify-content:center;gap:18px}
+@media(max-width:800px){
+  .hero{text-align:center}
 }
 </style>
 </head>
@@ -274,61 +244,69 @@ footer{
 
 <!-- HERO -->
 <section class="hero reveal">
-  <div>
-    <h1>
-      Nour Maandhito<br>
-      <span>Digital Branding & Website Specialist</span>
-    </h1>
-    <p>
-      Membantu personal brand, bisnis, dan marketing property
-      tampil profesional melalui website modern
-      yang membangun kepercayaan dan meningkatkan konversi.
-    </p>
-    <a class="btn" href="https://wa.me/6281802168184" target="_blank">
-      💬 Konsultasi WhatsApp
-    </a>
-  </div>
-  
+  <h1>
+    Nour Maandhito<br>
+    <span>Digital Branding & Website Specialist</span>
+  </h1>
+  <p>
+    Membantu personal brand, bisnis, dan marketing property
+    tampil profesional melalui website modern
+    yang meningkatkan kepercayaan & konversi.
+  </p>
+  <a class="btn" href="https://wa.me/6281802168184" target="_blank">
+    💬 Konsultasi WhatsApp
+  </a>
 </section>
 
-<!-- TRUST -->
+<!-- STATS -->
 <section class="reveal">
-  <div class="trust">
-    <div><strong>50+</strong>Project Website</div>
-    <div><strong>100%</strong>Custom Design</div>
-    <div><strong>Fast</strong>Loading & SEO Ready</div>
-    <div><strong>WA</strong>Closing Focus</div>
+  <div class="stats">
+    <div class="stat">
+      <strong data-target="50">0</strong>
+      <span>Project Website</span>
+    </div>
+    <div class="stat">
+      <strong data-target="100">0</strong>
+      <span>% Custom Design</span>
+    </div>
+    <div class="stat">
+      <strong data-target="98">0</strong>
+      <span>% Client Satisfaction</span>
+    </div>
+    <div class="stat">
+      <strong data-target="24">0</strong>
+      <span>Jam Support</span>
+    </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- TESTIMONI -->
 <section class="reveal">
-  <h2 class="section-title">Layanan</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>🏠 Marketing Property</h3>
-      <p>Landing page & website property siap closing.</p>
-    </div>
-    <div class="card">
-      <h3>🏢 Company Profile</h3>
-      <p>Website profesional untuk perusahaan & UMKM.</p>
-    </div>
-    <div class="card">
-      <h3>👤 Personal Branding</h3>
-      <p>Website personal untuk agen & profesional.</p>
-    </div>
-    <div class="card">
-      <h3>📊 Custom Tools</h3>
-      <p>Kalkulator KPR, form leads, WhatsApp.</p>
+  <h2 class="section-title">Testimoni Klien</h2>
+  <div class="slider">
+    <div class="slides">
+      <div class="testi">
+        <p>“Website saya terlihat jauh lebih profesional dan langsung dipercaya klien.”</p>
+        <strong>— Agen Property BSD</strong>
+      </div>
+      <div class="testi">
+        <p>“Desainnya rapi, cepat, dan langsung terhubung ke WhatsApp.”</p>
+        <strong>— Owner UMKM</strong>
+      </div>
+      <div class="testi">
+        <p>“Setelah pakai website ini, closing jadi lebih mudah.”</p>
+        <strong>— Marketing Perumahan</strong>
+      </div>
     </div>
   </div>
+  <div class="dots"></div>
 </section>
 
 <!-- CTA -->
 <div class="cta reveal">
-  <h2>Siap tampil profesional & dipercaya klien?</h2>
+  <h2>Siap naik level & terlihat profesional?</h2>
   <p style="color:var(--muted);margin:20px 0">
-    Konsultasi gratis • Fokus hasil • Desain eksklusif
+    Konsultasi gratis • Fokus hasil • Website eksklusif
   </p>
   <a class="btn" href="https://wa.me/6281802168184" target="_blank">
     🚀 Mulai Sekarang
@@ -336,21 +314,68 @@ footer{
 </div>
 
 <footer class="reveal">
-  © 2026 Nour Maandhito • Premium Personal Branding Website
+  © 2026 Nour Maandhito • Premium Personal Branding
 </footer>
 
 </div>
 
 <script>
-const reveals = document.querySelectorAll(".reveal");
-const observer = new IntersectionObserver(entries=>{
+/* REVEAL */
+const reveals=document.querySelectorAll(".reveal");
+const obs=new IntersectionObserver(e=>{
+  e.forEach(i=>i.isIntersecting&&i.target.classList.add("show"))
+},{threshold:.15});
+reveals.forEach(el=>obs.observe(el));
+
+/* COUNT UP */
+const counters=document.querySelectorAll("[data-target]");
+const counterObs=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
-      entry.target.classList.add("show");
+      const el=entry.target;
+      const target=+el.dataset.target;
+      let count=0;
+      const step=target/60;
+      const interval=setInterval(()=>{
+        count+=step;
+        if(count>=target){
+          el.textContent=target;
+          clearInterval(interval);
+        }else{
+          el.textContent=Math.floor(count);
+        }
+      },20);
+      counterObs.unobserve(el);
     }
   });
-},{threshold:0.15});
-reveals.forEach(el=>observer.observe(el));
+},{threshold:.6});
+counters.forEach(c=>counterObs.observe(c));
+
+/* SLIDER */
+const slides=document.querySelector(".slides");
+const dotsWrap=document.querySelector(".dots");
+const total=document.querySelectorAll(".testi").length;
+let index=0;
+
+for(let i=0;i<total;i++){
+  const d=document.createElement("div");
+  d.className="dot"+(i===0?" active":"");
+  d.onclick=()=>goSlide(i);
+  dotsWrap.appendChild(d);
+}
+
+function goSlide(i){
+  index=i;
+  slides.style.transform=`translateX(-${i*100}%)`;
+  document.querySelectorAll(".dot").forEach((d,idx)=>{
+    d.classList.toggle("active",idx===i);
+  });
+}
+
+setInterval(()=>{
+  index=(index+1)%total;
+  goSlide(index);
+},5000);
 </script>
 
 </body>
