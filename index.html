@@ -327,29 +327,62 @@ const obs=new IntersectionObserver(e=>{
 },{threshold:.15});
 reveals.forEach(el=>obs.observe(el));
 
-/* COUNT UP */
-const counters=document.querySelectorAll("[data-target]");
-const counterObs=new IntersectionObserver(entries=>{
+/* ================= REVEAL ================= */
+const reveals = document.querySelectorAll(".reveal");
+const revealObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add("show");
+  });
+},{threshold:.15});
+reveals.forEach(el=>revealObs.observe(el));
+
+/* ================= COUNT RESET SYSTEM ================= */
+const statsSection = document.querySelector(".stats");
+const counters = document.querySelectorAll(".stat strong");
+let animated = false;
+
+function resetCounters(){
+  counters.forEach(c=>{
+    c.textContent = "0";
+  });
+  animated = false;
+}
+
+function animateCounters(){
+  if(animated) return;
+  animated = true;
+
+  counters.forEach(counter=>{
+    const target = +counter.dataset.target;
+    let value = 0;
+    const step = Math.max(1, target / 60);
+
+    const interval = setInterval(()=>{
+      value += step;
+      if(value >= target){
+        counter.textContent = target;
+        clearInterval(interval);
+      }else{
+        counter.textContent = Math.floor(value);
+      }
+    }, 20);
+  });
+}
+
+/* OBSERVER UNTUK STATS */
+const statsObserver = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
-      const el=entry.target;
-      const target=+el.dataset.target;
-      let count=0;
-      const step=target/60;
-      const interval=setInterval(()=>{
-        count+=step;
-        if(count>=target){
-          el.textContent=target;
-          clearInterval(interval);
-        }else{
-          el.textContent=Math.floor(count);
-        }
-      },20);
-      counterObs.unobserve(el);
+      animateCounters(); // masuk area
+    }else{
+      resetCounters();   // keluar area
     }
   });
-},{threshold:.6});
-counters.forEach(c=>counterObs.observe(c));
+},{
+  threshold:0.6 // harus benar2 stay di area stats
+});
+
+statsObserver.observe(statsSection);
 
 /* SLIDER */
 const slides=document.querySelector(".slides");
