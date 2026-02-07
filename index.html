@@ -283,41 +283,66 @@ circle.progress{
   color:var(--muted);
 }
 
-/* ================= COMPANY STATS HORIZONTAL ================= */
+/* ================= COMPANY STATS CLEAN ================= */
 .stats-wrap{
-  display:flex;
-  gap:48px;
-  align-items:flex-start;
-  justify-content:space-between;
-  padding:20px 0;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:28px;
+  align-items:start;
 }
 
-/* CIRCLE tetap pakai style sebelumnya */
+/* kecilin circle */
 .circle{
-  flex:0 0 auto;
-  width:160px;
+  width:140px;
+  margin:auto;
   text-align:center;
 }
 
-/* MOBILE → SCROLL KE SAMPING */
-@media(max-width:900px){
+/* kecilin SVG */
+.circle svg{
+  width:120px;
+  height:120px;
+}
+
+/* angka di tengah */
+.circle strong{
+  top:42px;
+  font-size:22px;
+}
+
+/* text bawah */
+.circle span{
+  font-size:13px;
+  margin-top:10px;
+}
+
+/* TABLET */
+@media(max-width:1000px){
   .stats-wrap{
-    overflow-x:auto;
-    padding-bottom:10px;
-    scroll-snap-type:x mandatory;
+    grid-template-columns:repeat(2,1fr);
+    row-gap:36px;
+  }
+}
+
+/* MOBILE */
+@media(max-width:520px){
+  .stats-wrap{
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
   }
 
   .circle{
-    scroll-snap-align:start;
+    width:120px;
   }
 
-  .stats-wrap::-webkit-scrollbar{
-    height:6px;
+  .circle svg{
+    width:100px;
+    height:100px;
   }
 
-  .stats-wrap::-webkit-scrollbar-thumb{
-    background:rgba(255,255,255,.2);
-    border-radius:10px;
+  .circle strong{
+    top:36px;
+    font-size:20px;
   }
 }
 
