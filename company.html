@@ -6,44 +6,187 @@
 <title>Company Profile | Nour Maandhito</title>
 
 <style>
+:root{
+  --bg:#0b0e14;
+  --bg-soft:#12162a;
+  --glass:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.14);
+  --text:#f1f3ff;
+  --muted:#a6accd;
+  --accent:#5b7cff;
+  --accent-soft:#9bb0ff;
+  --radius:22px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#0c0f16;
-  color:#eef0ff;
-  margin:0;
+  background:
+    radial-gradient(900px 500px at top,#1b214a,transparent),
+    var(--bg);
+  color:var(--text);
+  line-height:1.75;
 }
-a{color:#5b7cff;text-decoration:none}
+
+a{text-decoration:none;color:inherit}
+
 .container{
-  max-width:1100px;
+  max-width:1160px;
   margin:auto;
-  padding:40px 24px;
+  padding:32px 24px;
 }
-header{
+
+/* ================= NAV ================= */
+.nav{
+  position:sticky;
+  top:18px;
+  z-index:50;
+  margin-bottom:80px;
+}
+
+.nav-inner{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:60px;
+  padding:14px 26px;
+  border-radius:999px;
+  background:linear-gradient(180deg,var(--glass),transparent);
+  backdrop-filter:blur(18px);
+  border:1px solid var(--border);
 }
-nav a{margin-left:20px}
 
-.section{margin-bottom:80px}
-.section h2{font-size:32px;margin-bottom:20px}
-.section p{color:#a6accd;max-width:700px;line-height:1.7}
+.nav a{
+  margin-left:22px;
+  font-size:14px;
+  color:var(--muted);
+}
 
+.nav a:hover{color:var(--text)}
+
+/* ================= SECTION ================= */
+.section{
+  margin-bottom:120px;
+}
+
+.section h2{
+  font-size:34px;
+  margin-bottom:22px;
+  letter-spacing:-.4px;
+}
+
+.section p{
+  color:var(--muted);
+  max-width:720px;
+  font-size:17px;
+}
+
+/* ================= GRID ================= */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px;
+  gap:26px;
+  margin-top:40px;
 }
+
 .card{
-  background:#151a2d;
-  padding:28px;
-  border-radius:20px;
+  background:linear-gradient(180deg,var(--glass),transparent);
+  border:1px solid var(--border);
+  padding:30px;
+  border-radius:var(--radius);
+  transition:.35s;
 }
+
+.card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(91,124,255,.6);
+}
+
+.card h3{
+  margin-bottom:14px;
+  font-size:18px;
+}
+
+.card p{
+  color:var(--muted);
+  font-size:15px;
+}
+
+/* ================= COMPANY STATS ================= */
+.stats-wrap{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:28px;
+  margin-top:50px;
+}
+
+.circle{
+  width:140px;
+  margin:auto;
+  text-align:center;
+}
+
+.circle svg{
+  width:120px;
+  height:120px;
+  transform:rotate(-90deg);
+}
+
+circle{
+  fill:none;
+  stroke-width:10;
+}
+
+circle.bg{
+  stroke:rgba(255,255,255,.14);
+}
+
+circle.progress{
+  stroke:var(--accent);
+  stroke-linecap:round;
+  stroke-dasharray:327;
+  stroke-dashoffset:327;
+  filter:drop-shadow(0 0 10px rgba(91,124,255,.6));
+}
+
+.circle strong{
+  position:absolute;
+  margin-top:-82px;
+  font-size:22px;
+  font-weight:700;
+  background:linear-gradient(135deg,var(--accent),var(--accent-soft));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.circle span{
+  display:block;
+  margin-top:10px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* ================= FOOTER ================= */
 footer{
   text-align:center;
-  color:#a6accd;
-  margin-top:80px;
+  color:var(--muted);
+  padding:60px 0 40px;
+  font-size:14px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:1000px){
+  .stats-wrap{
+    grid-template-columns:repeat(2,1fr);
+    row-gap:40px;
+  }
+}
+
+@media(max-width:600px){
+  .section h2{
+    font-size:28px;
+  }
 }
 </style>
 </head>
@@ -51,14 +194,18 @@ footer{
 <body>
 <div class="container">
 
-<header>
-  <strong>Nour Maandhito</strong>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="kpr.html">Kalkulator KPR</a>
-  </nav>
-</header>
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-inner">
+    <strong>Nour Maandhito</strong>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="kpr.html">Kalkulator KPR</a>
+    </div>
+  </div>
+</div>
 
+<!-- INTRO -->
 <section class="section">
   <h2>Company Profile</h2>
   <p>
@@ -68,6 +215,7 @@ footer{
   </p>
 </section>
 
+<!-- SERVICES -->
 <section class="section">
   <h2>Layanan Perusahaan</h2>
   <div class="grid">
@@ -77,28 +225,116 @@ footer{
     </div>
     <div class="card">
       <h3>Landing Page Produk</h3>
-      <p>Halaman fokus konversi & WhatsApp.</p>
+      <p>Halaman fokus konversi & integrasi WhatsApp.</p>
     </div>
     <div class="card">
       <h3>Maintenance Website</h3>
-      <p>Update konten & perawatan website.</p>
+      <p>Update konten, keamanan, dan performa website.</p>
     </div>
   </div>
 </section>
 
+<!-- STATS -->
+<section class="section">
+  <h2>Company Performance</h2>
+  <div class="stats-wrap">
+    <div class="circle">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg" cx="60" cy="60" r="52"/>
+        <circle class="progress" cx="60" cy="60" r="52" data-target="120"/>
+      </svg>
+      <strong>0</strong>
+      <span>Projects</span>
+    </div>
+
+    <div class="circle">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg" cx="60" cy="60" r="52"/>
+        <circle class="progress" cx="60" cy="60" r="52" data-target="98"/>
+      </svg>
+      <strong>0%</strong>
+      <span>Satisfaction</span>
+    </div>
+
+    <div class="circle">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg" cx="60" cy="60" r="52"/>
+        <circle class="progress" cx="60" cy="60" r="52" data-target="100"/>
+      </svg>
+      <strong>0%</strong>
+      <span>Custom System</span>
+    </div>
+
+    <div class="circle">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg" cx="60" cy="60" r="52"/>
+        <circle class="progress" cx="60" cy="60" r="52" data-target="24"/>
+      </svg>
+      <strong>0</strong>
+      <span>Support Hours</span>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE -->
 <section class="section">
   <h2>Kenapa Pilih Saya?</h2>
   <p>
-    Fokus pada hasil, tampilan modern,
+    Fokus pada hasil, tampilan modern, performa ringan,
     dan website yang benar-benar dipakai
-    untuk branding dan penjualan.
+    untuk branding dan penjualan jangka panjang.
   </p>
 </section>
 
 <footer>
-  © 2026 Nour Maandhito
+  © 2026 Nour Maandhito • Company Profile
 </footer>
 
 </div>
+
+<script>
+/* CIRCLE PROGRESS (RESET SAAT KELUAR) */
+const stats=document.querySelector(".stats-wrap");
+const circles=document.querySelectorAll(".circle");
+let played=false;
+
+function resetCircles(){
+  circles.forEach(c=>{
+    const p=c.querySelector(".progress");
+    const t=c.querySelector("strong");
+    p.style.strokeDashoffset=327;
+    t.textContent=t.textContent.includes('%')?'0%':'0';
+  });
+  played=false;
+}
+
+function animateCircles(){
+  if(played) return;
+  played=true;
+
+  circles.forEach(c=>{
+    const p=c.querySelector(".progress");
+    const t=c.querySelector("strong");
+    const target=+p.dataset.target;
+    const percent=t.textContent.includes('%');
+    let val=0;
+
+    const i=setInterval(()=>{
+      val++;
+      p.style.strokeDashoffset=327-(327*(val/target));
+      t.textContent=percent?val+'%':val;
+      if(val>=target) clearInterval(i);
+    },18);
+  });
+}
+
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) animateCircles();
+    else resetCircles();
+  });
+},{threshold:.6}).observe(stats);
+</script>
+
 </body>
 </html>
