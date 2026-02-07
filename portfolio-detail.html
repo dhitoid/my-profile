@@ -3,22 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Detail Portfolio | Nour Maandhito</title>
-
+<title>Case Study — Website Company Profile UMKM | Nour Maandhito</title>
 
 <style>
+:root{
+  --bg:#0c0f16;
+  --card:#151a2d;
+  --text:#eef0ff;
+  --muted:#a6accd;
+  --accent:#5b7cff;
+  --radius:22px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#0c0f16;
-  color:#eef0ff;
-  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.75;
 }
-a{color:#5b7cff;text-decoration:none}
+
+a{color:var(--accent);text-decoration:none}
 
 .container{
   max-width:1000px;
   margin:auto;
-  padding:40px 24px;
+  padding:40px 24px 80px;
 }
 
 /* HEADER */
@@ -30,57 +41,70 @@ header{
 }
 
 /* HERO */
-.hero{
-  margin-bottom:60px;
-}
 .hero img{
   width:100%;
-  border-radius:24px;
-  box-shadow:0 30px 80px rgba(0,0,0,.45);
+  border-radius:26px;
+  box-shadow:0 30px 90px rgba(0,0,0,.55);
 }
+
 .hero h1{
-  font-size:36px;
-  margin:30px 0 14px;
+  font-size:38px;
+  margin:34px 0 14px;
 }
+
 .hero p{
-  color:#a6accd;
-  max-width:720px;
-  line-height:1.7;
+  color:var(--muted);
+  max-width:760px;
+}
+
+/* SECTION */
+.section{
+  margin-top:90px;
+}
+
+.section h2{
+  font-size:28px;
+  margin-bottom:20px;
+}
+
+.section p{
+  color:var(--muted);
+  max-width:820px;
+}
+
+/* LIST */
+.list{
+  margin-top:16px;
+  padding-left:20px;
+}
+
+.list li{
+  margin-bottom:10px;
+  color:var(--muted);
 }
 
 /* INFO GRID */
 .info{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:24px;
+  gap:22px;
   margin-top:40px;
 }
+
 .box{
-  background:#151a2d;
+  background:var(--card);
   padding:24px;
   border-radius:18px;
 }
+
 .box strong{
   display:block;
-  margin-bottom:8px;
+  margin-bottom:6px;
 }
 
-/* CTA */
-.cta{
-  margin-top:80px;
-  padding:50px 30px;
-  background:linear-gradient(135deg,#1c214a,#0f1226);
-  border-radius:30px;
-  text-align:center;
-}
-
+/* GALLERY */
 .gallery{
   margin-top:80px;
-}
-
-.gallery h2{
-  font-size:28px;
-  margin-bottom:24px;
 }
 
 .gallery-grid{
@@ -101,6 +125,7 @@ header{
   transform:translateY(-6px) scale(1.03);
 }
 
+/* LIGHTBOX */
 .lightbox{
   position:fixed;
   inset:0;
@@ -115,10 +140,41 @@ header{
 .lightbox img{
   max-width:90%;
   max-height:90%;
-  border-radius:20px;
-  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  border-radius:22px;
+  box-shadow:0 40px 100px rgba(0,0,0,.7);
 }
 
+/* CTA */
+.cta{
+  margin-top:100px;
+  padding:60px 32px;
+  background:linear-gradient(135deg,#1c214a,#0f1226);
+  border-radius:32px;
+  text-align:center;
+}
+
+.cta h2{
+  font-size:30px;
+}
+
+.cta p{
+  color:var(--muted);
+  margin:16px 0 26px;
+}
+
+.btn{
+  display:inline-flex;
+  padding:15px 28px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#5b7cff,#8aa2ff);
+  color:#fff;
+  font-weight:600;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero h1{font-size:32px}
+}
 </style>
 </head>
 
@@ -130,15 +186,60 @@ header{
   <a href="portfolio.html">← Kembali ke Portfolio</a>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-  <img src="images/portfolio-umkm.jpg" alt="Website Company UMKM">
+  <img src="images/portfolio-umkm-main.jpg" alt="Website Company Profile UMKM">
   <h1>Website Company Profile UMKM</h1>
   <p>
-    Website company profile modern untuk UMKM yang ingin tampil profesional,
-    meningkatkan kepercayaan klien, dan mempermudah komunikasi via WhatsApp.
+    Case study pembuatan website company profile modern
+    untuk membantu UMKM tampil profesional dan meningkatkan
+    kepercayaan calon klien.
   </p>
 </section>
 
+<!-- BACKGROUND -->
+<section class="section">
+  <h2>Latar Belakang Klien</h2>
+  <p>
+    Klien merupakan UMKM yang sebelumnya belum memiliki website
+    profesional. Informasi bisnis hanya disampaikan melalui WhatsApp
+    sehingga sulit meyakinkan calon klien baru.
+  </p>
+</section>
+
+<!-- PROBLEM -->
+<section class="section">
+  <h2>Masalah</h2>
+  <ul class="list">
+    <li>Belum memiliki website resmi</li>
+    <li>Tampilan bisnis kurang profesional</li>
+    <li>Informasi sulit dijelaskan ke klien baru</li>
+    <li>Tidak mobile friendly</li>
+  </ul>
+</section>
+
+<!-- SOLUTION -->
+<section class="section">
+  <h2>Solusi yang Diberikan</h2>
+  <ul class="list">
+    <li>Website company profile modern & clean</li>
+    <li>Struktur konten jelas & mudah dipahami</li>
+    <li>Tombol WhatsApp untuk komunikasi cepat</li>
+    <li>Responsive di semua perangkat</li>
+  </ul>
+</section>
+
+<!-- RESULT -->
+<section class="section">
+  <h2>Hasil</h2>
+  <p>
+    Website digunakan sebagai alat presentasi kepada klien,
+    meningkatkan kepercayaan, dan mempermudah proses komunikasi.
+    Klien menjadi lebih percaya diri dalam menawarkan jasanya.
+  </p>
+</section>
+
+<!-- INFO -->
 <section class="info">
   <div class="box">
     <strong>Jenis Website</strong>
@@ -149,8 +250,8 @@ header{
     Branding & Trust
   </div>
   <div class="box">
-    <strong>Fitur</strong>
-    WhatsApp, Responsive
+    <strong>Platform</strong>
+    Static Website
   </div>
   <div class="box">
     <strong>Status</strong>
@@ -158,20 +259,21 @@ header{
   </div>
 </section>
 
+<!-- GALLERY -->
 <section class="gallery">
   <h2>Screenshot Website</h2>
-
   <div class="gallery-grid">
-    <img src="images/portfolio-umkm-1.jpg" alt="">
-    <img src="images/portfolio-umkm-2.jpg" alt="">
-    <img src="images/portfolio-umkm-mobile.jpg" alt="">
+    <img src="images/portfolio-umkm-1.jpg">
+    <img src="images/portfolio-umkm-2.jpg">
+    <img src="images/portfolio-umkm-mobile.jpg">
   </div>
 </section>
 
+<!-- CTA -->
 <div class="cta">
   <h2>Mau website seperti ini?</h2>
-  <p style="color:#a6accd;margin:16px 0">
-    Konsultasi gratis & solusi sesuai kebutuhan bisnis
+  <p>
+    Konsultasi gratis & solusi sesuai kebutuhan bisnis kamu
   </p>
   <a href="https://wa.me/6281802168184" class="btn">
     💬 Konsultasi WhatsApp
@@ -180,6 +282,7 @@ header{
 
 </div>
 
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <img id="lightboxImg">
 </div>
