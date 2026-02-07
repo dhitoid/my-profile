@@ -283,6 +283,44 @@ circle.progress{
   color:var(--muted);
 }
 
+/* ================= COMPANY STATS HORIZONTAL ================= */
+.stats-wrap{
+  display:flex;
+  gap:48px;
+  align-items:flex-start;
+  justify-content:space-between;
+  padding:20px 0;
+}
+
+/* CIRCLE tetap pakai style sebelumnya */
+.circle{
+  flex:0 0 auto;
+  width:160px;
+  text-align:center;
+}
+
+/* MOBILE → SCROLL KE SAMPING */
+@media(max-width:900px){
+  .stats-wrap{
+    overflow-x:auto;
+    padding-bottom:10px;
+    scroll-snap-type:x mandatory;
+  }
+
+  .circle{
+    scroll-snap-align:start;
+  }
+
+  .stats-wrap::-webkit-scrollbar{
+    height:6px;
+  }
+
+  .stats-wrap::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.2);
+    border-radius:10px;
+  }
+}
+
 </style>
 </head>
 
@@ -319,33 +357,23 @@ circle.progress{
 
 <!-- STATS -->
 <section class="reveal">
-  <div class="stats-circle">
+  <h2 class="section-title">Company Performance</h2>
+
+  <div class="stats-wrap">
 
     <div class="circle">
       <svg viewBox="0 0 120 120">
         <circle class="bg" cx="60" cy="60" r="52"/>
-        <circle class="progress" cx="60" cy="60" r="52"
-          data-target="50"/>
+        <circle class="progress" cx="60" cy="60" r="52" data-target="120"/>
       </svg>
       <strong>0</strong>
-      <span>Project Website</span>
+      <span>Company Projects</span>
     </div>
 
     <div class="circle">
       <svg viewBox="0 0 120 120">
         <circle class="bg" cx="60" cy="60" r="52"/>
-        <circle class="progress" cx="60" cy="60" r="52"
-          data-target="100"/>
-      </svg>
-      <strong>0%</strong>
-      <span>Custom Design</span>
-    </div>
-
-    <div class="circle">
-      <svg viewBox="0 0 120 120">
-        <circle class="bg" cx="60" cy="60" r="52"/>
-        <circle class="progress" cx="60" cy="60" r="52"
-          data-target="98"/>
+        <circle class="progress" cx="60" cy="60" r="52" data-target="98"/>
       </svg>
       <strong>0%</strong>
       <span>Client Satisfaction</span>
@@ -354,11 +382,19 @@ circle.progress{
     <div class="circle">
       <svg viewBox="0 0 120 120">
         <circle class="bg" cx="60" cy="60" r="52"/>
-        <circle class="progress" cx="60" cy="60" r="52"
-          data-target="24"/>
+        <circle class="progress" cx="60" cy="60" r="52" data-target="100"/>
+      </svg>
+      <strong>0%</strong>
+      <span>Custom System</span>
+    </div>
+
+    <div class="circle">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg" cx="60" cy="60" r="52"/>
+        <circle class="progress" cx="60" cy="60" r="52" data-target="24"/>
       </svg>
       <strong>0</strong>
-      <span>Jam Support</span>
+      <span>Support Hours</span>
     </div>
 
   </div>
@@ -412,7 +448,7 @@ const revealObs=new IntersectionObserver(e=>{
 reveals.forEach(el=>revealObs.observe(el));
 
 /* ================= CIRCLE PROGRESS SYSTEM ================= */
-const stats=document.querySelector(".stats-circle");
+const stats=document.querySelector(".stats-wrap");
 const circles=document.querySelectorAll(".circle");
 let played=false;
 
