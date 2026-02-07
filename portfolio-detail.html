@@ -175,6 +175,30 @@ header{
 @media(max-width:768px){
   .hero h1{font-size:32px}
 }
+
+.hero-actions{
+  margin-top:28px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.btn.secondary{
+  background:transparent;
+  border:1px solid rgba(255,255,255,.18);
+  color:#eef0ff;
+  box-shadow:none;
+}
+
+.btn.secondary:hover{
+  background:rgba(255,255,255,.08);
+}
+
+.btn.disabled{
+  opacity:.45;
+  pointer-events:none;
+}
+
 </style>
 </head>
 
@@ -195,6 +219,18 @@ header{
     untuk membantu UMKM tampil profesional dan meningkatkan
     kepercayaan calon klien.
   </p>
+
+  <div class="hero-actions">
+<!--    <a href="https://contohwebsiteklien.com" target="_blank" class="btn secondary">
+      🌐 Live Website
+    </a>-->
+    <a class="btn secondary disabled">
+  🔒 Live Website
+</a>
+    <a href="https://wa.me/6281802168184" class="btn">
+      💬 Konsultasi
+    </a>
+  </div>
 </section>
 
 <!-- BACKGROUND -->
