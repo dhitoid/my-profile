@@ -1,0 +1,128 @@
+:root{
+  --bg:#0b0e14;
+  --bg-soft:#12162a;
+  --glass:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.14);
+  --text:#f1f3ff;
+  --muted:#a6accd;
+  --accent:#5b7cff;
+  --accent-soft:#9bb0ff;
+  --radius:22px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(900px 500px at top,#1b214a,transparent),
+    var(--bg);
+  color:var(--text);
+  line-height:1.75;
+}
+
+a{text-decoration:none;color:inherit}
+
+.container{
+  max-width:1160px;
+  margin:auto;
+  padding:32px 24px;
+}
+
+/* NAV */
+.nav{
+  position:sticky;
+  top:18px;
+  z-index:50;
+  margin-bottom:90px;
+}
+
+.nav-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 26px;
+  border-radius:999px;
+  background:linear-gradient(180deg,var(--glass),transparent);
+  backdrop-filter:blur(18px);
+  border:1px solid var(--border);
+}
+
+.nav a{
+  margin-left:22px;
+  font-size:14px;
+  color:var(--muted);
+}
+.nav a:hover{color:var(--text)}
+
+/* SECTION */
+.section{margin-bottom:120px}
+.section h2{
+  font-size:34px;
+  margin-bottom:22px;
+  letter-spacing:-.4px;
+}
+.section p{
+  color:var(--muted);
+  max-width:720px;
+  font-size:17px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
+  margin-top:40px;
+}
+
+/* CARD */
+.card{
+  background:linear-gradient(180deg,var(--glass),transparent);
+  border:1px solid var(--border);
+  padding:30px;
+  border-radius:var(--radius);
+  transition:.35s;
+}
+.card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(91,124,255,.6);
+}
+.card h3{margin-bottom:12px;font-size:18px}
+.card p{color:var(--muted);font-size:15px}
+
+/* PORTFOLIO */
+.portfolio-thumb{
+  height:180px;
+  border-radius:16px;
+  background:
+    linear-gradient(135deg,#2a347a,#141a40);
+  margin-bottom:18px;
+  position:relative;
+  overflow:hidden;
+}
+
+.badge{
+  position:absolute;
+  bottom:14px;
+  left:14px;
+  padding:6px 12px;
+  font-size:12px;
+  background:rgba(0,0,0,.4);
+  border:1px solid var(--border);
+  border-radius:999px;
+  backdrop-filter:blur(10px);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:70px 0 40px;
+  font-size:14px;
+}
+
+@media(max-width:600px){
+  .section h2{font-size:28px}
+}
